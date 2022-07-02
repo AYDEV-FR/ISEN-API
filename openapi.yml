@@ -1,0 +1,164 @@
+openapi: '3.0.2'
+info:
+  title: ISEN API
+  version: '0.1.1'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /token:
+    post:
+      security: []
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: OK
+  # /info:
+  #   get:
+  #     summary: Return first name and last name
+  #     description: TODO
+  #     security:
+  #       - BearerAuth: []
+  #     responses:
+  #       '200':
+  #         description: OK
+  #       '401':
+  #         description: Not authenticated
+  /notations:
+    get:
+      summary: Returns a list of all user's notes
+      description: TODO
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notation'
+              example:
+                - Date: 05/12/2001
+                  Code: "21_HOGWART_S3_HERBOLOGY"
+                  Note: "19"
+                  Comments: "Good job !"
+                  Teachers:
+                    - Professor Sprout
+                - Date: 05/12/2001
+                  Code: "21_HOGWAR_Defense_Against_the_Dark_Arts "
+                  Note: "18"
+                  Comments: "Your Stunning Spell could be better"
+                  Teachers:
+                    - Quirinus Quirrell
+                    - Dolores Umbridge
+                    - Remus Lupin
+        '401':
+          description: Not authenticated
+  /absences:
+    summary: Returns a list of all user's absences
+    description: TODO
+    get:
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Absence'
+              example:
+                - Date: 05/12/2001
+                  Reason: "Absence excusée"
+                  Duration: "4:00"
+                  Hours: "08:00 - 12:00"
+                  Course: "Herbology class"
+                  Teachers:
+                    - Professor Sprout
+                  Subject: Herbology of Mandrake Root
+                - Date: 05/12/2001
+                  Reason: "Absence non excusée"
+                  Duration: "2:00"
+                  Hours: "08:00 - 12:00"
+                  Course: "Potion class"
+                  Teachers:
+                    - Severus Snape
+                    - Horace Slughorn
+                  Subject: Love filter potion
+                  
+        '401':
+          description: Not authenticated
+  /agenda:
+    summary: Returns a list of all user's courses
+    description: TODO
+    get:
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not authenticated
+
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    Absence:
+      type: object
+      properties:
+        Date:
+          type: string
+        Reason:
+          type: string
+        Duration:
+          type: string
+        Hours:
+          type: string
+        Course:
+          type: string
+        Teachers:
+          type: array
+          items:
+            type: string
+        Subject:
+          type: string
+    Notation:
+      type: object
+      properties:
+        Date:
+          type: string
+        Code:
+          type: string
+        Name:
+          type: string
+        Note:
+          type: string
+        Comments:
+          type: string
+        Teachers:
+          type: array
+          items:
+            type: string
+
+  securitySchemes:
+   BearerAuth:
+      type: http
+      scheme: bearer
