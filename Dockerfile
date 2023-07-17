@@ -1,6 +1,6 @@
-FROM golang:1.10 AS build
+FROM golang:1.20 AS build
 WORKDIR /go/src
-COPY go ./go
+COPY . ./go
 COPY main.go .
 
 ENV CGO_ENABLED=0
