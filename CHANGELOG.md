@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.0.2
+
+### Added or Changed
+
+- Add pinning certificate chain in Dockerfile
+- Add user in Dockerfile (non-root)
+
 ## v0.0.1
 
 ### Added or Changed

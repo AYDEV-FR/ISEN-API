@@ -10,7 +10,7 @@ export default function () {
   const params = {
     headers: {
           'Content-Type': 'application/json',
-        'Token': '0ADC323EA1AD7771C1B423DCA5D2EFB7'
+        'Token': '<REDACTED>'
     },
   };
 

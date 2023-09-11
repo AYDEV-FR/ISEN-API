@@ -11,5 +11,5 @@ func main() {
 
 	router := api.NewRouter()
 
-	log.Fatal(router.Run(":80"))
+	log.Fatal(router.Run(":8080"))
 }
