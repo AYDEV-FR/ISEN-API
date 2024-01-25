@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.0.3
+
+### Added or Changed
+
+- Fix aurion id update
+- Add docker-compose and caddy config for hosting
+
 ## v0.0.2
 
 ### Added or Changed

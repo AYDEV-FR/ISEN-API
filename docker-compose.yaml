@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  caddy:
+    image: caddy:2
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy-data:/data
+      - ./caddy-config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - api-network
+
+  isen-api:
+    image: docker.io/aydev/isen-api:latest
+    networks:
+      - api-network
+
+networks:
+  api-network:

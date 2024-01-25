@@ -1,0 +1,3 @@
+https://api.isen-cyber.ovh {
+    reverse_proxy isen-api:8080
+}
