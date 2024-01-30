@@ -35,18 +35,8 @@ func getFormId(document io.Reader) (FormId, error) {
 	return FormId(formId), nil
 }
 
-func CalendarPageOption(scheduleOptions ScrapScheduleOption) ScrapScheduleOption {
-	var now time.Time
-	var start time.Time
-	var end time.Time
+func DefaultScheduleOptions(scheduleOptions ScrapScheduleOption, now time.Time) ScrapScheduleOption {
 	var week int
-
-	localLoc, _ := time.LoadLocation("Europe/Paris")
-	if scheduleOptions.Date == "" {
-		now = time.Now().In(localLoc)
-	} else {
-		now, _ = time.Parse("02/01/2006", scheduleOptions.Date)
-	}
 
 	if scheduleOptions.Week == "" {
 		week = now.YearDay()/7 + 1
@@ -55,30 +45,51 @@ func CalendarPageOption(scheduleOptions ScrapScheduleOption) ScrapScheduleOption
 		}
 		scheduleOptions.Week = fmt.Sprintf("%02d-%04d", week, now.Year())
 	}
-	fmt.Println(scheduleOptions.Week)
 
 	if scheduleOptions.View == "" {
 		scheduleOptions.View = "agendaWeek"
 	}
+
+	return scheduleOptions
+}
+
+func CalendarPageOption(scheduleOptions ScrapScheduleOption) ScrapScheduleOption {
+	var now time.Time
+	var start time.Time
+	var end time.Time
+
+	localLoc, _ := time.LoadLocation("Europe/Paris")
+	if scheduleOptions.Date == "" {
+		now = time.Now().In(localLoc)
+	} else {
+		now, _ = time.Parse("02/01/2006", scheduleOptions.Date)
+	}
+
+	scheduleOptions = DefaultScheduleOptions(scheduleOptions, now)
+
+	if now.Weekday() == time.Sunday {
+		now = now.AddDate(0, 0, 1)
+	}
 	switch scheduleOptions.View {
 	case "agendaWeek":
-		if now.Weekday() == time.Sunday {
-			start = time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, localLoc)
-			end = time.Date(now.Year(), now.Month(), now.Day()+7, 0, 0, 0, 0, localLoc)
-		} else {
-			start = time.Date(now.Year(), now.Month(), now.Day()-(int(now.Weekday())-1), 0, 0, 0, 0, localLoc)
-			end = time.Date(now.Year(), now.Month(), now.Day()+(7-int(now.Weekday())), 0, 0, 0, 0, localLoc)
-		}
+		start = time.Date(now.Year(), now.Month(), now.Day()-(int(now.Weekday())-1), 0, 0, 0, 0, localLoc)
+		end = time.Date(now.Year(), now.Month(), now.Day()+(7-int(now.Weekday())), 23, 59, 59, 0, localLoc)
 	case "agendaDay":
-		if now.Weekday() == time.Sunday {
-			start = time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, localLoc)
-			end = time.Date(now.Year(), now.Month(), now.Day()+1, 23, 59, 59, 0, localLoc)
+		start = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, localLoc)
+		end = time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, localLoc)
+	case "month":
+		if now.AddDate(0, 0, 7-int(now.Weekday())).Month() != now.Month() {
+			start = time.Date(now.Year(), now.Month(), now.Day()-(int(now.Weekday())-1), 0, 0, 0, 0, localLoc)
+			firstOfNextMonth := time.Date(now.Year(), now.Month()+1, 1, 0, 0, 0, 0, localLoc)
+			end = firstOfNextMonth.AddDate(0, 1, -1)
 		} else {
-			start = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, localLoc)
-			end = time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, localLoc)
+			start = time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, localLoc)
+			end = start.AddDate(0, 1, -1)
+		}
+		if end.Weekday() != time.Sunday {
+			end = end.AddDate(0, 0, 7-int(now.Weekday()))
 		}
 	}
-	//TODO: month view
 
 	return ScrapScheduleOption{
 		Start:    strconv.FormatInt(start.UnixMilli(), 10),
