@@ -10,9 +10,10 @@ const (
 	LoginPage    = "https://ent-toulon.isen.fr/login"
 	MainMenuPage = "https://ent-toulon.isen.fr/faces/MainMenuPage.xhtml"
 
-	SelfInfoMenuId aurion.MenuId = "0_0"
-	NotationMenuId aurion.MenuId = "2_1"
-	AbsenceMenuId  aurion.MenuId = "2_2"
+	SelfInfoMenuId   aurion.MenuId = "0_0"
+	SelfAgendaMenuId aurion.MenuId = "1_0"
+	NotationMenuId   aurion.MenuId = "2_1"
+	AbsenceMenuId    aurion.MenuId = "2_2"
 )
 
 func NotationPage() aurion.ScrapTableOption {

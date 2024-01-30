@@ -30,7 +30,33 @@ func AbsencesGet(c *gin.Context) {
 
 // AgendaGet -
 func AgendaGet(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{})
+	token := c.GetHeader("Token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "missing token header"})
+		return
+	}
+
+	if token == "FAKETOKEN" {
+		c.JSON(http.StatusOK, "TODO")
+		return
+	}
+
+	queryParams := c.Request.URL.Query()
+	scheduleOptions := aurion.ScrapScheduleOption{
+		Start:    queryParams.Get("start"),
+		End:      queryParams.Get("end"),
+		View:     queryParams.Get("view"),
+		Date:     queryParams.Get("date"),
+		Week:     queryParams.Get("week"),
+		Location: queryParams.Get("location"),
+	}
+
+	agenda, err := isen.GetPersonalAgenda(aurion.Token(token), scheduleOptions)
+	if err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, agenda)
 }
 
 // NotationsGet - Returns a list of all user's notes
