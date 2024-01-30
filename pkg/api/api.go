@@ -43,12 +43,8 @@ func AgendaGet(c *gin.Context) {
 
 	queryParams := c.Request.URL.Query()
 	scheduleOptions := aurion.ScrapScheduleOption{
-		Start:    queryParams.Get("start"),
-		End:      queryParams.Get("end"),
-		View:     queryParams.Get("view"),
-		Date:     queryParams.Get("date"),
-		Week:     queryParams.Get("week"),
-		Location: queryParams.Get("location"),
+		Start: queryParams.Get("start"),
+		End:   queryParams.Get("end"),
 	}
 
 	agenda, err := isen.GetPersonalAgenda(aurion.Token(token), scheduleOptions)

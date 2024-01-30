@@ -19,11 +19,6 @@ type FormId string
 type ScrapScheduleOption struct {
 	Start string
 	End   string
-	// Can be month, agendaWeek or agendaDay
-	View     string
-	Date     string
-	Week     string
-	Location string
 }
 
 func getFormId(document io.Reader) (FormId, error) {
@@ -35,69 +30,34 @@ func getFormId(document io.Reader) (FormId, error) {
 	return FormId(formId), nil
 }
 
-func DefaultScheduleOptions(scheduleOptions ScrapScheduleOption, now time.Time) ScrapScheduleOption {
-	var week int
-
-	if scheduleOptions.Week == "" {
-		week = now.YearDay()/7 + 1
-		if now.Weekday() == time.Sunday {
-			week = week + 1
-		}
-		scheduleOptions.Week = fmt.Sprintf("%02d-%04d", week, now.Year())
-	}
-
-	if scheduleOptions.View == "" {
-		scheduleOptions.View = "agendaWeek"
-	}
-
-	return scheduleOptions
-}
-
 func CalendarPageOption(scheduleOptions ScrapScheduleOption) ScrapScheduleOption {
 	var now time.Time
 	var start time.Time
 	var end time.Time
 
 	localLoc, _ := time.LoadLocation("Europe/Paris")
-	if scheduleOptions.Date == "" {
-		now = time.Now().In(localLoc)
-	} else {
-		now, _ = time.Parse("02/01/2006", scheduleOptions.Date)
-	}
-
-	scheduleOptions = DefaultScheduleOptions(scheduleOptions, now)
+	now = time.Now().In(localLoc)
 
 	if now.Weekday() == time.Sunday {
 		now = now.AddDate(0, 0, 1)
 	}
-	switch scheduleOptions.View {
-	case "agendaWeek":
+
+	if scheduleOptions.Start == "" {
 		start = time.Date(now.Year(), now.Month(), now.Day()-(int(now.Weekday())-1), 0, 0, 0, 0, localLoc)
+	} else {
+		startMilli, _ := strconv.ParseInt(scheduleOptions.Start, 10, 64)
+		start = time.UnixMilli(startMilli)
+	}
+	if scheduleOptions.End == "" {
 		end = time.Date(now.Year(), now.Month(), now.Day()+(7-int(now.Weekday())), 23, 59, 59, 0, localLoc)
-	case "agendaDay":
-		start = time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, localLoc)
-		end = time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, localLoc)
-	case "month":
-		if now.AddDate(0, 0, 7-int(now.Weekday())).Month() != now.Month() {
-			start = time.Date(now.Year(), now.Month(), now.Day()-(int(now.Weekday())-1), 0, 0, 0, 0, localLoc)
-			firstOfNextMonth := time.Date(now.Year(), now.Month()+1, 1, 0, 0, 0, 0, localLoc)
-			end = firstOfNextMonth.AddDate(0, 1, -1)
-		} else {
-			start = time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, localLoc)
-			end = start.AddDate(0, 1, -1)
-		}
-		if end.Weekday() != time.Sunday {
-			end = end.AddDate(0, 0, 7-int(now.Weekday()))
-		}
+	} else {
+		endMilli, _ := strconv.ParseInt(scheduleOptions.End, 10, 64)
+		end = time.UnixMilli(endMilli)
 	}
 
 	return ScrapScheduleOption{
-		Start:    strconv.FormatInt(start.UnixMilli(), 10),
-		End:      strconv.FormatInt(end.UnixMilli(), 10),
-		View:     scheduleOptions.View,
-		Date:     scheduleOptions.Date,
-		Week:     scheduleOptions.Week,
-		Location: scheduleOptions.Location,
+		Start: strconv.FormatInt(start.UnixMilli(), 10),
+		End:   strconv.FormatInt(end.UnixMilli(), 10),
 	}
 }
 
@@ -115,10 +75,6 @@ func CalendarPage(formId FormId, options ScrapScheduleOption) ScrapTableOption {
 
 			string(formId + "_start"): {options.Start},
 			string(formId + "_end"):   {options.End},
-			string(formId + "_view"):  {options.View},
-
-			"form:date_input": {options.Date},
-			"form:week":       {options.Week},
 		},
 	}
 }
