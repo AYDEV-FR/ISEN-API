@@ -28,7 +28,8 @@ func AbsencesGet(c *gin.Context) {
 	c.JSON(http.StatusOK, absences)
 }
 
-// AgendaGet -
+// AgendaGet - Returns a list of all user's courses between start and end timestamps.
+// start and end must be milliseconds UNIX timestamps. They are not mandatory and have defaults to the first and last day of the week.
 func AgendaGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -37,7 +38,7 @@ func AgendaGet(c *gin.Context) {
 	}
 
 	if token == "FAKETOKEN" {
-		c.JSON(http.StatusOK, "TODO")
+		c.JSON(http.StatusOK, fakeAgenda)
 		return
 	}
 
