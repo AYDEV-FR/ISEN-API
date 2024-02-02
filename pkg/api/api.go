@@ -64,11 +64,17 @@ func EventAgendaGet(c *gin.Context) {
 		return
 	}
 
+	eventId := c.Param("eventId")
+
 	if token == "FAKETOKEN" {
-		c.JSON(http.StatusOK, "TODO")
+		if eventId == "1" {
+			c.JSON(http.StatusOK, fakeEvent)
+		} else {
+			c.JSON(http.StatusOK, "{}")
+		}
+
 		return
 	}
-	eventId := c.Param("eventId")
 
 	event, err := isen.GetPersonalAgendaEvent(aurion.Token(token), aurion.EventId(eventId))
 	if err != nil {
