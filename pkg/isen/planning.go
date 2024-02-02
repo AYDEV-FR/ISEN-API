@@ -3,6 +3,8 @@ package isen
 import (
 	"encoding/json"
 	"github.com/AYDEV-FR/ISEN-Api/pkg/aurion"
+	"github.com/PuerkitoBio/goquery"
+	"strings"
 )
 
 type ScheduleEvent struct {
@@ -16,7 +18,20 @@ type ScheduleEvent struct {
 }
 
 type ScheduleEventDetails struct {
-	Id string `json:"Id,omitempty"`
+	Id          aurion.EventId `json:"Id,omitempty"`
+	Start       string         `json:"Start,omitempty"`
+	End         string         `json:"End,omitempty"`
+	Status      string         `json:"Status,omitempty"`
+	Subject     string         `json:"Subject,omitempty"`
+	Type        string         `json:"Type,omitempty"`
+	Description string         `json:"Description,omitempty"`
+	IsPaper     *bool          `json:"IsPaper,omitempty"`
+	Rooms       []string       `json:"Rooms,omitempty"`
+	Teachers    []string       `json:"Teachers,omitempty"`
+	Students    []string       `json:"Students,omitempty"`
+	Groups      []string       `json:"Groups,omitempty"`
+	CourseName  string         `json:"CourseName,omitempty"`
+	Module      string         `json:"Module,omitempty"`
 }
 
 func GetPersonalAgenda(token aurion.Token, scheduleOptions aurion.ScrapScheduleOption) ([]ScheduleEvent, error) {
@@ -37,4 +52,90 @@ func GetPersonalAgenda(token aurion.Token, scheduleOptions aurion.ScrapScheduleO
 	}
 
 	return planning, err
+}
+
+func GetPersonalAgendaEvent(token aurion.Token, eventId aurion.EventId) (ScheduleEventDetails, error) {
+	var eventDetails ScheduleEventDetails
+	page, err := aurion.MenuNavigateTo(token, SelfAgendaMenuId, MainMenuPage)
+	if err != nil {
+		return ScheduleEventDetails{}, err
+	}
+
+	scheduleEventsHtml, err := aurion.ScrapScheduleEvent(token, eventId, page)
+	if err != nil {
+		return ScheduleEventDetails{}, err
+	}
+
+	reader := strings.NewReader(scheduleEventsHtml)
+	doc, err := goquery.NewDocumentFromReader(reader)
+	if err != nil {
+		return ScheduleEventDetails{}, err
+	}
+
+	doc.Find("div[class='ui-grid-row']").Each(func(i int, s *goquery.Selection) {
+		switch i {
+		case 0:
+			eventDetails.Status = s.Find("div").Last().Text()
+		case 1:
+			eventDetails.Subject = s.Find("div").Last().Text()
+		case 2:
+			eventDetails.Type = s.Find("div").Last().Text()
+		case 3:
+			eventDetails.Description = s.Find("div").Last().Text()
+		case 4:
+			isPaperText := s.Find("div").Last().Text()
+			if isPaperText == "Non" {
+				f := new(bool)
+				*f = false
+				eventDetails.IsPaper = f
+			} else if isPaperText == "Oui" {
+				t := new(bool)
+				*t = true
+				eventDetails.IsPaper = t
+			}
+		}
+	})
+
+	doc.Find("table").Each(func(tableIndex int, s *goquery.Selection) {
+		s.Find("tr[role='row']").Each(func(rowIndex int, s *goquery.Selection) {
+			s.Find("td[role='gridcell']").Each(func(gridIndex int, s *goquery.Selection) {
+				switch tableIndex {
+				case 0:
+					if rowIndex == 0 {
+						eventDetails.Start += s.Text() + " "
+					} else if rowIndex == 1 {
+						eventDetails.End += s.Text() + " "
+					}
+				case 1:
+					if gridIndex == 1 {
+						// here we retrieve only "Libellé", not "Code"
+						eventDetails.Rooms = append(eventDetails.Rooms, s.Text())
+					}
+				case 2:
+					if gridIndex == 0 {
+						eventDetails.Teachers = append(eventDetails.Teachers, s.Text()+" ")
+					} else if gridIndex == 1 {
+						eventDetails.Teachers[rowIndex-1] += s.Text()
+					}
+				case 3:
+					if gridIndex == 0 {
+						eventDetails.Students = append(eventDetails.Students, s.Text()+" ")
+					} else if gridIndex == 1 {
+						eventDetails.Students[rowIndex-1] += s.Text()
+					}
+				case 4:
+					eventDetails.Groups = append(eventDetails.Groups, s.Text())
+				case 5:
+					if gridIndex == 0 {
+						eventDetails.CourseName = s.Text()
+					} else if gridIndex == 1 {
+						eventDetails.Module = s.Text()
+					}
+				}
+			})
+		})
+	})
+	eventDetails.Start = strings.TrimSpace(eventDetails.Start)
+	eventDetails.End = strings.TrimSpace(eventDetails.End)
+	return eventDetails, err
 }

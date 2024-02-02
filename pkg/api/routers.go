@@ -73,6 +73,13 @@ var routes = Routes{
 	},
 
 	{
+		"AgendaEventGet",
+		http.MethodGet,
+		"/v1/agenda/event/:eventId",
+		EventAgendaGet,
+	},
+
+	{
 		"NotationsGet",
 		http.MethodGet,
 		"/v1/notations",
