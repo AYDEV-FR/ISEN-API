@@ -18,20 +18,20 @@ type ScheduleEvent struct {
 }
 
 type ScheduleEventDetails struct {
-	Id          aurion.EventId `json:"Id,omitempty"`
-	Start       string         `json:"Start,omitempty"`
-	End         string         `json:"End,omitempty"`
-	Status      string         `json:"Status,omitempty"`
-	Subject     string         `json:"Subject,omitempty"`
-	Type        string         `json:"Type,omitempty"`
-	Description string         `json:"Description,omitempty"`
-	IsPaper     *bool          `json:"IsPaper,omitempty"`
-	Rooms       []string       `json:"Rooms,omitempty"`
-	Teachers    []string       `json:"Teachers,omitempty"`
-	Students    []string       `json:"Students,omitempty"`
-	Groups      []string       `json:"Groups,omitempty"`
-	CourseName  string         `json:"CourseName,omitempty"`
-	Module      string         `json:"Module,omitempty"`
+	Id          aurion.EventId `json:"id,omitempty"`
+	Start       string         `json:"start,omitempty"`
+	End         string         `json:"end,omitempty"`
+	Status      string         `json:"status,omitempty"`
+	Subject     string         `json:"subject,omitempty"`
+	Type        string         `json:"type,omitempty"`
+	Description string         `json:"description,omitempty"`
+	IsPaper     *bool          `json:"isPaper,omitempty"`
+	Rooms       []string       `json:"rooms,omitempty"`
+	Teachers    []string       `json:"teachers,omitempty"`
+	Students    []string       `json:"students,omitempty"`
+	Groups      []string       `json:"groups,omitempty"`
+	CourseName  string         `json:"courseName,omitempty"`
+	Module      string         `json:"module,omitempty"`
 }
 
 func GetPersonalAgenda(token aurion.Token, scheduleOptions aurion.ScrapScheduleOption) ([]ScheduleEvent, error) {

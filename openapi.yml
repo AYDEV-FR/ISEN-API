@@ -159,26 +159,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScheduleEventDetails'
               example:
-                Id: "1"
-                Start: "Du mercredi 5 décembre 2001 à 08:00"
-                End: "Au mercredi 5 décembre 2001 à 10:00"
-                Status: "REALISE"
-                Subject: "Herbology"
-                Type: "Travaux dirigés"
-                Description: ""
-                IsPaper: false
-                Rooms:
+                id: "1"
+                start: "Du mercredi 5 décembre 2001 à 08:00"
+                end: "Au mercredi 5 décembre 2001 à 10:00"
+                status: "REALISE"
+                subject: "Herbology"
+                type: "Travaux dirigés"
+                description: ""
+                isPaper: false
+                rooms:
                   - Greenhouse
-                Teachers:
+                teachers:
                   - Sprout Professor
-                Students:
+                students:
                   - GRANGER Hermione
                   - POTTER Harry
                   - WEASLEY Ronald
-                Groups:
+                groups:
                   - 0102YEAR1
-                CourseName: "Herbology Class"
-                Module: "Herbology"
+                courseName: "Herbology Class"
+                module: "Herbology"
         '401':
           description: Not authenticated
 
@@ -250,41 +250,41 @@ components:
     ScheduleEventDetails:
       type: object
       properties:
-        Id:
+        id:
           type: string
-        Start:
+        start:
           type: string
-        End:
+        end:
           type: string
-        Status:
+        status:
           type: string
-        Subject:
+        subject:
           type: string
-        Type:
+        type:
           type: string
-        Description:
+        description:
           type: string
-        IsPaper:
+        isPaper:
           type: boolean
-        Rooms:
+        rooms:
           type: array
           items:
             type: string
-        Teachers:
+        teachers:
           type: array
           items:
             type: string
-        Students:
+        students:
           type: array
           items:
             type: string
-        Groups:
+        groups:
           type: array
           items:
             type: string
-        CourseName:
+        courseName:
           type: string
-        Module:
+        module:
           type: string
 
   securitySchemes:
