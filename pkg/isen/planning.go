@@ -6,13 +6,13 @@ import (
 )
 
 type ScheduleEvent struct {
-	Id        string `json:"Id,omitempty"`
-	Title     string `json:"Title,omitempty"`
-	Start     string `json:"Start,omitempty"`
-	End       string `json:"End,omitempty"`
-	AllDay    bool   `json:"AllDay,omitempty"`
-	Editable  bool   `json:"Editable,omitempty"`
-	ClassName string `json:"ClassName,omitempty"`
+	Id        string `json:"id,omitempty"`
+	Title     string `json:"title,omitempty"`
+	Start     string `json:"start,omitempty"`
+	End       string `json:"end,omitempty"`
+	AllDay    bool   `json:"allDay,omitempty"`
+	Editable  bool   `json:"editable,omitempty"`
+	ClassName string `json:"className,omitempty"`
 }
 
 type ScheduleEventDetails struct {
