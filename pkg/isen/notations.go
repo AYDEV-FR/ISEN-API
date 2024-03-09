@@ -12,7 +12,7 @@ type Notation struct {
 	Code          string   `json:"code,omitempty"`
 	Name          string   `json:"name,omitempty"`
 	Note          string   `json:"note,omitempty"`
-	AbsenceReason string   `json:"absence_reason,omitempty"`
+	AbsenceReason string   `json:"absenceReason,omitempty"`
 	Comments      string   `json:"comments,omitempty"`
 	Teachers      []string `json:"teachers,omitempty"`
 }

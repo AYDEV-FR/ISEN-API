@@ -45,17 +45,17 @@ paths:
                 items:
                   $ref: '#/components/schemas/Notation'
               example:
-                - Date: 05/12/2001
-                  Code: "21_HOGWART_S3_HERBOLOGY"
-                  Note: "19"
-                  Comments: "Good job !"
-                  Teachers:
+                - date: 05/12/2001
+                  code: "21_HOGWART_S3_HERBOLOGY"
+                  note: "19"
+                  comments: "Good job !"
+                  teachers:
                     - Professor Sprout
-                - Date: 05/12/2001
-                  Code: "21_HOGWAR_Defense_Against_the_Dark_Arts "
-                  Note: "18"
-                  Comments: "Your Stunning Spell could be better"
-                  Teachers:
+                - date: 05/12/2001
+                  code: "21_HOGWAR_Defense_Against_the_Dark_Arts "
+                  note: "18"
+                  comments: "Your Stunning Spell could be better"
+                  teachers:
                     - Quirinus Quirrell
                     - Dolores Umbridge
                     - Remus Lupin
@@ -77,23 +77,23 @@ paths:
                 items:
                   $ref: '#/components/schemas/Absence'
               example:
-                - Date: 05/12/2001
-                  Reason: "Absence excusée"
-                  Duration: "4:00"
-                  Hours: "08:00 - 12:00"
-                  Course: "Herbology class"
-                  Teachers:
+                - date: 05/12/2001
+                  reason: "Absence excusée"
+                  duration: "4:00"
+                  hours: "08:00 - 12:00"
+                  course: "Herbology class"
+                  teachers:
                     - Professor Sprout
-                  Subject: Herbology of Mandrake Root
-                - Date: 05/12/2001
-                  Reason: "Absence non excusée"
-                  Duration: "2:00"
-                  Hours: "08:00 - 12:00"
-                  Course: "Potion class"
-                  Teachers:
+                  subject: Herbology of Mandrake Root
+                - date: 05/12/2001
+                  reason: "Absence non excusée"
+                  duration: "2:00"
+                  hours: "08:00 - 12:00"
+                  course: "Potion class"
+                  teachers:
                     - Severus Snape
                     - Horace Slughorn
-                  Subject: Love filter potion
+                  subject: Love filter potion
                   
         '401':
           description: Not authenticated
@@ -197,36 +197,36 @@ components:
     Absence:
       type: object
       properties:
-        Date:
+        date:
           type: string
-        Reason:
+        reason:
           type: string
-        Duration:
+        duration:
           type: string
-        Hours:
+        hours:
           type: string
-        Course:
+        course:
           type: string
-        Teachers:
+        teachers:
           type: array
           items:
             type: string
-        Subject:
+        subject:
           type: string
     Notation:
       type: object
       properties:
-        Date:
+        date:
           type: string
-        Code:
+        code:
           type: string
-        Name:
+        name:
           type: string
-        Note:
+        note:
           type: string
-        Comments:
+        comments:
           type: string
-        Teachers:
+        teachers:
           type: array
           items:
             type: string
