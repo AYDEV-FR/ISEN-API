@@ -138,6 +138,49 @@ paths:
                   className: "CM"
         '401':
           description: Not authenticated
+  /agenda/event/{eventId}:
+    summary: Returns an event's details from the user's personal agenda
+    description: TODO
+    get:
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: path
+          name: eventId
+          schema:
+            type: integer
+            minimum: 1
+          description: The event ID that can be found in the agenda.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleEventDetails'
+              example:
+                id: "1"
+                start: "Du mercredi 5 décembre 2001 à 08:00"
+                end: "Au mercredi 5 décembre 2001 à 10:00"
+                status: "REALISE"
+                subject: "Herbology"
+                type: "Travaux dirigés"
+                description: ""
+                isPaper: false
+                rooms:
+                  - Greenhouse
+                teachers:
+                  - Sprout Professor
+                students:
+                  - GRANGER Hermione
+                  - POTTER Harry
+                  - WEASLEY Ronald
+                groups:
+                  - 0102YEAR1
+                courseName: "Herbology Class"
+                module: "Herbology"
+        '401':
+          description: Not authenticated
 
 components:
   schemas:
@@ -203,6 +246,45 @@ components:
         editable:
           type: boolean
         className:
+          type: string
+    ScheduleEventDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        status:
+          type: string
+        subject:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        isPaper:
+          type: boolean
+        rooms:
+          type: array
+          items:
+            type: string
+        teachers:
+          type: array
+          items:
+            type: string
+        students:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        courseName:
+          type: string
+        module:
           type: string
 
   securitySchemes:

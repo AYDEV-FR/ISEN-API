@@ -56,6 +56,34 @@ func AgendaGet(c *gin.Context) {
 	c.JSON(http.StatusOK, agenda)
 }
 
+// EventAgendaGet -
+func EventAgendaGet(c *gin.Context) {
+	token := c.GetHeader("Token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "missing token header"})
+		return
+	}
+
+	eventId := c.Param("eventId")
+
+	if token == "FAKETOKEN" {
+		if eventId == "1" {
+			c.JSON(http.StatusOK, fakeEvent)
+		} else {
+			c.JSON(http.StatusOK, "{}")
+		}
+
+		return
+	}
+
+	event, err := isen.GetPersonalAgendaEvent(aurion.Token(token), aurion.EventId(eventId))
+	if err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, event)
+}
+
 // NotationsGet - Returns a list of all user's notes
 func NotationsGet(c *gin.Context) {
 	token := c.GetHeader("Token")

@@ -58,3 +58,20 @@ var fakeAgenda = []isen.ScheduleEvent{
 		ClassName: "CM",
 	},
 }
+
+var fakeEvent = isen.ScheduleEventDetails{
+	Id:          "1",
+	Start:       "Du mercredi 5 décembre 2001 à 08:00",
+	End:         "Au mercredi 5 décembre 2001 à 10:00",
+	Status:      "REALISE",
+	Subject:     "Herbology",
+	Type:        "Travaux dirigés",
+	Description: "",
+	IsPaper:     func() *bool { b := false; return &b }(),
+	Rooms:       []string{"Greenhouse"},
+	Teachers:    []string{"Sprout Professor"},
+	Students:    []string{"GRANGER Hermione", "POTTER Harry", "WEASLEY Ronald"},
+	Groups:      []string{"0102YEAR1"},
+	CourseName:  "Herbology Class",
+	Module:      "Herbology",
+}

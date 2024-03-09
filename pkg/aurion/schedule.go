@@ -15,6 +15,7 @@ import (
 )
 
 type FormId string
+type EventId string
 
 type ScrapScheduleOption struct {
 	Start string
@@ -79,6 +80,22 @@ func CalendarPage(formId FormId, options ScrapScheduleOption) ScrapTableOption {
 	}
 }
 
+func CalendarEventPage(formId FormId, eventId EventId) ScrapTableOption {
+	return ScrapTableOption{
+		Url: "https://ent-toulon.isen.fr/faces/Planning.xhtml",
+		FormOption: url.Values{
+			"javax.faces.partial.ajax":          {"true"},
+			"javax.faces.source":                {string(formId)},
+			"javax.faces.partial.execute":       {string(formId)},
+			"javax.faces.partial.render":        {"form:modaleDetail"},
+			"form":                              {"form"},
+			"javax.faces.behavior.event":        {"eventSelect"},
+			"javax.faces.partial.event":         {"eventSelect"},
+			string(formId) + "_selectedEventId": {string(eventId)},
+		},
+	}
+}
+
 func ScrapSchedule(token Token, scheduleOptions ScrapScheduleOption, currentPage []byte) (string, error) {
 
 	// Set client
@@ -126,6 +143,53 @@ func ScrapSchedule(token Token, scheduleOptions ScrapScheduleOption, currentPage
 	xml.Unmarshal(content, &partialResponse)
 
 	return convertPartialResponseToJson(partialResponse, formId), nil
+}
+
+func ScrapScheduleEvent(token Token, eventId EventId, currentPage []byte) (string, error) {
+	client := &http.Client{}
+
+	// Get view state from currentPage
+	reader := bytes.NewReader(currentPage)
+	viewState, err := getViewState(reader)
+	if err != nil {
+		return "", err
+	}
+	// Get form id from currentPage
+	reader = bytes.NewReader(currentPage)
+	formId, err := getFormId(reader)
+	if err != nil {
+		return "", err
+	}
+
+	pageOptions := CalendarEventPage(formId, eventId)
+
+	formData := pageOptions.FormOption
+	formData.Add("javax.faces.ViewState", string(viewState))
+
+	req, err := http.NewRequest("POST", pageOptions.Url, strings.NewReader(formData.Encode()))
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("Faces-Request", "partial/ajax")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Cookie", fmt.Sprintf("JSESSIONID=%v", token))
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	content, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	// Convert partial response to HTML compatible array
+	var partialResponse PartialResponse
+	xml.Unmarshal(content, &partialResponse)
+
+	return convertPartialResponseToHTML(partialResponse), nil
 }
 
 func convertPartialResponseToJson(partialResponse PartialResponse, formId FormId) string {
