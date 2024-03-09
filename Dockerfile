@@ -3,7 +3,7 @@ WORKDIR /go/src
 COPY . .
 ENV CGO_ENABLED=0
 RUN go get -d -v ./...
-RUN go build -a -installsuffix cgo -o isen-api .
+RUN go build -a -installsuffix cgo -o isen-api -tags timetzdata .
 
 FROM scratch AS runtime
 ENV GIN_MODE=release

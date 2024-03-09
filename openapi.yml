@@ -103,9 +103,39 @@ paths:
     get:
       security:
         - BearerAuth: []
+      parameters:
+        - in: query
+          name: start
+          schema:
+            type: integer
+          description: The start timestamp in UNIX Milliseconds when the events in the agenda will begin
+        - in: query
+          name: end
+          schema:
+            type: integer
+          description: The end timestamp in UNIX Milliseconds when the events in the agenda will end
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScheduleEvent'
+              example:
+                - id: "1"
+                  title: "08:00 - 10:00 - Herbology Class - Professor - Sprout - GreenHouse - TD - (02h00) -  - 154632"
+                  start: "2001-12-05T08:00:00+0100"
+                  end: "2001-12-05T10:00:00+0100"
+                  editable: true
+                  className: "TD"
+                - id: "2"
+                  title: "10:00 - 12:00 - Potion Class - Severus - Snape - Alchemy Classroom - Magistral Course - (02h00) -  - 597864"
+                  start: "2001-12-05T10:00:00+0100"
+                  end: "2001-12-05T12:00:00+0100"
+                  editable: true
+                  className: "CM"
         '401':
           description: Not authenticated
 
@@ -157,6 +187,23 @@ components:
           type: array
           items:
             type: string
+    ScheduleEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        allDay:
+          type: boolean
+        editable:
+          type: boolean
+        className:
+          type: string
 
   securitySchemes:
    BearerAuth:
