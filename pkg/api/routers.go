@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-contrib/cache/persistence"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 // Route is the information for every URI.
@@ -23,10 +24,15 @@ type Route struct {
 // Routes is the list of the generated Route.
 type Routes []Route
 
-// NewRouter returns a new router.
 func NewRouter() *gin.Engine {
 	store := persistence.NewInMemoryStore(time.Second)
 	router := gin.Default()
+	
+	config := cors.DefaultConfig()
+    	config.AllowAllOrigins = true
+    	config.AllowHeaders = []string{"Token"} //Just for fetch in JS because we have a CORS Problem. I Authorise just the header "Token" nothing more.
+    	router.Use(cors.New(config))
+	
 	for _, route := range routes {
 		switch route.Method {
 		case http.MethodGet:
