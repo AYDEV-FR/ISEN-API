@@ -18,8 +18,8 @@ type Notation struct {
 }
 
 type NotationClass struct {
-	Name         string `json:"name,omitempty"`
-	Code         string `json:"code,omitempty"`
+	Code         string `json:"name,omitempty"`
+	Name         string `json:"code,omitempty"`
 	NotePersonal string `json:"notePersonal,omitempty"`
 	NoteAverage  string `json:"noteAverage,omitempty"`
 	NoteMin      string `json:"noteMin,omitempty"`
@@ -96,9 +96,9 @@ func GetNotationClassList(token aurion.Token) ([]NotationClass, error) {
 		s.Find("td[role='gridcell']").Each(func(i int, s *goquery.Selection) {
 			switch i {
 			case 0:
-				noteClass.Name = s.Text()
-			case 1:
 				noteClass.Code = s.Text()
+			case 1:
+				noteClass.Name = s.Text()
 			case 2:
 				noteClass.NotePersonal = s.Text()
 			case 3:

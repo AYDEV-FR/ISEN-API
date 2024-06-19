@@ -114,8 +114,7 @@ func NotationsClassGet(c *gin.Context) {
 	}
 
 	if token == "FAKETOKEN" {
-		// TODO: fakeNotesClass
-		c.JSON(http.StatusOK, nil)
+		c.JSON(http.StatusOK, fakeNotesClass)
 		return
 	}
 
