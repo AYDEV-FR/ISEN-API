@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-contrib/cache/persistence"
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 // Route is the information for every URI.
@@ -27,12 +27,12 @@ type Routes []Route
 func NewRouter() *gin.Engine {
 	store := persistence.NewInMemoryStore(time.Second)
 	router := gin.Default()
-	
+
 	config := cors.DefaultConfig()
-    	config.AllowAllOrigins = true
-    	config.AllowHeaders = []string{"Token"} //Just for fetch in JS because we have a CORS Problem. I Authorise just the header "Token" nothing more.
-    	router.Use(cors.New(config))
-	
+	config.AllowAllOrigins = true
+	config.AllowHeaders = []string{"Token"} //Just for fetch in JS because we have a CORS Problem. I Authorise just the header "Token" nothing more.
+	router.Use(cors.New(config))
+
 	for _, route := range routes {
 		switch route.Method {
 		case http.MethodGet:
@@ -90,6 +90,13 @@ var routes = Routes{
 		http.MethodGet,
 		"/v1/notations",
 		NotationsGet,
+	},
+
+	{
+		"NotationsClassGet",
+		http.MethodGet,
+		"/v1/notations/class",
+		NotationsClassGet,
 	},
 
 	{
