@@ -59,4 +59,15 @@ func AbsencePage() aurion.ScrapTableOption {
 	}
 }
 
+func PersonalInformationsPage() aurion.ScrapTableOption {
+	return aurion.ScrapTableOption{
+		Url: "https://ent-toulon.isen.fr/faces/TeacherPage.xhtml",
+		FormOption: url.Values{
+			"form:tabPanelPrincipalFormulaireSupport_activeIndex": {"0"},
+			"form:tabPanelPrincipalFormulaireSupport_scrollState": {"0"},
+			"form": {"form"},
+		},
+	}
+}
+
 //2_3_3_0_0

@@ -80,6 +80,13 @@ var routes = Routes{
 	},
 
 	{
+		"PersonalInformationsGet",
+		http.MethodGet,
+		"/v1/personal-informations",
+		PersonalInformationsGet,
+	},
+
+	{
 		"TokenPost",
 		http.MethodPost,
 		"/v1/token",

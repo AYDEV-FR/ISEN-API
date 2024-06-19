@@ -54,6 +54,27 @@ func NotationsGet(c *gin.Context) {
 	c.JSON(http.StatusOK, notation)
 }
 
+// PersonalInformationsGet - Returns user's personal informations
+func PersonalInformationsGet(c *gin.Context) {
+	token := c.GetHeader("Token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "missing token header"})
+		return
+	}
+
+	if token == "FAKETOKEN" {
+		c.JSON(http.StatusOK, "TODO")
+		return
+	}
+
+	infos, err := isen.GetPersonalInformations(aurion.Token(token))
+	if err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, infos)
+}
+
 // TokenPost -
 func TokenPost(c *gin.Context) {
 	var loginCredentials aurion.Login

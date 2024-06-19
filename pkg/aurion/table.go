@@ -71,8 +71,9 @@ func ScrapTable(token Token, currentPage []byte, pageOptions ScrapTableOption) (
 
 func convertPartialResponseToHTML(partialResponse PartialResponse) string {
 	var html string
-
+	print(partialResponse.Text)
 	for _, update := range partialResponse.Changes.Update {
+		print(update.Text)
 		if update.ID == "form:dataTableFavori" {
 			html = fmt.Sprintf("<html><table>%s</table></html>", update.Text)
 		}
