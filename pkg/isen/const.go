@@ -63,6 +63,12 @@ func PersonalInformationsPage() aurion.ScrapTableOption {
 	return aurion.ScrapTableOption{
 		Url: "https://ent-toulon.isen.fr/faces/TeacherPage.xhtml",
 		FormOption: url.Values{
+			"javax.faces.partial.ajax":                {"true"},
+			"javax.faces.source":                      {"form:tabPanelPrincipalFormulaireSupport"},
+			"javax.faces.partial.execute":             {"form:tabPanelPrincipalFormulaireSupport"},
+			"javax.faces.partial.render":              {"form:tabPanelPrincipalFormulaireSupport"},
+			"form:tabPanelPrincipalFormulaireSupport": {"form:tabPanelPrincipalFormulaireSupport"},
+
 			"form:tabPanelPrincipalFormulaireSupport_activeIndex": {"0"},
 			"form:tabPanelPrincipalFormulaireSupport_scrollState": {"0"},
 			"form": {"form"},
