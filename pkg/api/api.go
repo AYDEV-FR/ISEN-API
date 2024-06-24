@@ -63,7 +63,7 @@ func PersonalInformationsGet(c *gin.Context) {
 	}
 
 	if token == "FAKETOKEN" {
-		c.JSON(http.StatusOK, "TODO")
+		c.JSON(http.StatusOK, fakePersonalInformations)
 		return
 	}
 
