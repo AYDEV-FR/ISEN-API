@@ -120,7 +120,7 @@ curl -X GET https://api.isen-cyber.ovh/v1/absences -H "Token: $TOKEN" | jq
 ### Get your courses
 
 ```
-curl -X GET https://api.isen-cyber.ovh/v1/planning -H "Token: $TOKEN" | jq
+curl -X GET https://api.isen-cyber.ovh/v1/agenda -H "Token: $TOKEN" | jq
 ```
 
 _For more examples, please refer to the [Swagger Documentation](openapi.yml)_
@@ -132,7 +132,7 @@ _For more examples, please refer to the [Swagger Documentation](openapi.yml)_
 ## Roadmap
 
 - [ ] Add unit test
-- [ ] Add planning route
+- [x] Add planning route
 - [x] Add informations route
 - [ ] Add teachers scrapping capabilities
 - [ ] Add possibility to automaticly calculate notation average

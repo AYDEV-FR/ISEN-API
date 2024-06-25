@@ -45,20 +45,52 @@ paths:
                 items:
                   $ref: '#/components/schemas/Notation'
               example:
-                - Date: 05/12/2001
-                  Code: "21_HOGWART_S3_HERBOLOGY"
-                  Note: "19"
-                  Comments: "Good job !"
-                  Teachers:
+                - date: 05/12/2001
+                  code: "21_HOGWART_S3_HERBOLOGY"
+                  note: "19"
+                  comments: "Good job !"
+                  teachers:
                     - Professor Sprout
-                - Date: 05/12/2001
-                  Code: "21_HOGWAR_Defense_Against_the_Dark_Arts "
-                  Note: "18"
-                  Comments: "Your Stunning Spell could be better"
-                  Teachers:
+                - date: 05/12/2001
+                  code: "21_HOGWAR_Defense_Against_the_Dark_Arts "
+                  note: "18"
+                  comments: "Your Stunning Spell could be better"
+                  teachers:
                     - Quirinus Quirrell
                     - Dolores Umbridge
                     - Remus Lupin
+        '401':
+          description: Not authenticated
+  /notations/class:
+    get:
+      summary: Returns a list of all user's class notes
+      description: TODO
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotationClass'
+              example:
+                - code: "21_HOGWART_S3_HERBOLOGY"
+                  name: "Semester 3 - Herbology - Examination"
+                  notePersonal: "19"
+                  noteAverage: "14.21"
+                  noteMin: "9.64"
+                  noteMax: "19"
+                  presence: "62"
+                - code: "21_HOGWAR_Defense_Against_the_Dark_Arts"
+                  name: "Semester 3 - Defense Against the Dark Arts - Examination"
+                  notePersonal: "18"
+                  noteAverage: "10.2"
+                  noteMin: "0"
+                  noteMax: "18.1"
+                  presence: "76"
         '401':
           description: Not authenticated
   /absences:
@@ -77,23 +109,23 @@ paths:
                 items:
                   $ref: '#/components/schemas/Absence'
               example:
-                - Date: 05/12/2001
-                  Reason: "Absence excusée"
-                  Duration: "4:00"
-                  Hours: "08:00 - 12:00"
-                  Course: "Herbology class"
-                  Teachers:
+                - date: 05/12/2001
+                  reason: "Absence excusée"
+                  duration: "4:00"
+                  hours: "08:00 - 12:00"
+                  course: "Herbology class"
+                  teachers:
                     - Professor Sprout
-                  Subject: Herbology of Mandrake Root
-                - Date: 05/12/2001
-                  Reason: "Absence non excusée"
-                  Duration: "2:00"
-                  Hours: "08:00 - 12:00"
-                  Course: "Potion class"
-                  Teachers:
+                  subject: Herbology of Mandrake Root
+                - date: 05/12/2001
+                  reason: "Absence non excusée"
+                  duration: "2:00"
+                  hours: "08:00 - 12:00"
+                  course: "Potion class"
+                  teachers:
                     - Severus Snape
                     - Horace Slughorn
-                  Subject: Love filter potion
+                  subject: Love filter potion
                   
         '401':
           description: Not authenticated
@@ -103,9 +135,82 @@ paths:
     get:
       security:
         - BearerAuth: []
+      parameters:
+        - in: query
+          name: start
+          schema:
+            type: integer
+          description: The start timestamp in UNIX Milliseconds when the events in the agenda will begin
+        - in: query
+          name: end
+          schema:
+            type: integer
+          description: The end timestamp in UNIX Milliseconds when the events in the agenda will end
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScheduleEvent'
+              example:
+                - id: "1"
+                  title: "08:00 - 10:00 - Herbology Class - Professor - Sprout - GreenHouse - TD - (02h00) -  - 154632"
+                  start: "2001-12-05T08:00:00+0100"
+                  end: "2001-12-05T10:00:00+0100"
+                  editable: true
+                  className: "TD"
+                - id: "2"
+                  title: "10:00 - 12:00 - Potion Class - Severus - Snape - Alchemy Classroom - Magistral Course - (02h00) -  - 597864"
+                  start: "2001-12-05T10:00:00+0100"
+                  end: "2001-12-05T12:00:00+0100"
+                  editable: true
+                  className: "CM"
+        '401':
+          description: Not authenticated
+  /agenda/event/{eventId}:
+    summary: Returns an event's details from the user's personal agenda
+    description: TODO
+    get:
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: path
+          name: eventId
+          schema:
+            type: integer
+            minimum: 1
+          description: The event ID that can be found in the agenda.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleEventDetails'
+              example:
+                id: "1"
+                start: "Du mercredi 5 décembre 2001 à 08:00"
+                end: "Au mercredi 5 décembre 2001 à 10:00"
+                status: "REALISE"
+                subject: "Herbology"
+                type: "Travaux dirigés"
+                description: ""
+                isPaper: false
+                rooms:
+                  - Greenhouse
+                teachers:
+                  - Sprout Professor
+                students:
+                  - GRANGER Hermione
+                  - POTTER Harry
+                  - WEASLEY Ronald
+                groups:
+                  - 0102YEAR1
+                courseName: "Herbology Class"
+                module: "Herbology"
         '401':
           description: Not authenticated
   /personal-informations:
@@ -208,36 +313,36 @@ components:
     Absence:
       type: object
       properties:
-        Date:
+        date:
           type: string
-        Reason:
+        reason:
           type: string
-        Duration:
+        duration:
           type: string
-        Hours:
+        hours:
           type: string
-        Course:
+        course:
           type: string
-        Teachers:
+        teachers:
           type: array
           items:
             type: string
-        Subject:
+        subject:
           type: string
     Notation:
       type: object
       properties:
-        Date:
+        date:
           type: string
-        Code:
+        code:
           type: string
-        Name:
+        name:
           type: string
-        Note:
+        note:
           type: string
-        Comments:
+        comments:
           type: string
-        Teachers:
+        teachers:
           type: array
           items:
             type: string
@@ -335,6 +440,79 @@ components:
           type: boolean
         CanIsenUsePersonalImage:
           type: boolean
+    NotationClass:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        notePersonal:
+          type: string
+        noteAverage:
+          type: string
+        noteMin:
+          type: string
+        noteMax:
+          type: string
+        presence:
+          type: string
+    ScheduleEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        allDay:
+          type: boolean
+        editable:
+          type: boolean
+        className:
+          type: string
+    ScheduleEventDetails:
+      type: object
+      properties:
+        id:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        status:
+          type: string
+        subject:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        isPaper:
+          type: boolean
+        rooms:
+          type: array
+          items:
+            type: string
+        teachers:
+          type: array
+          items:
+            type: string
+        students:
+          type: array
+          items:
+            type: string
+        groups:
+          type: array
+          items:
+            type: string
+        courseName:
+          type: string
+        module:
+          type: string
 
   securitySchemes:
    BearerAuth:
