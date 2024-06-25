@@ -61,6 +61,38 @@ paths:
                     - Remus Lupin
         '401':
           description: Not authenticated
+  /notations/class:
+    get:
+      summary: Returns a list of all user's class notes
+      description: TODO
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotationClass'
+              example:
+                - code: "21_HOGWART_S3_HERBOLOGY"
+                  name: "Semester 3 - Herbology - Examination"
+                  notePersonal: "19"
+                  noteAverage: "14.21"
+                  noteMin: "9.64"
+                  noteMax: "19"
+                  presence: "62"
+                - code: "21_HOGWAR_Defense_Against_the_Dark_Arts"
+                  name: "Semester 3 - Defense Against the Dark Arts - Examination"
+                  notePersonal: "18"
+                  noteAverage: "10.2"
+                  noteMin: "0"
+                  noteMax: "18.1"
+                  presence: "76"
+        '401':
+          description: Not authenticated
   /absences:
     summary: Returns a list of all user's absences
     description: TODO
@@ -230,6 +262,23 @@ components:
           type: array
           items:
             type: string
+    NotationClass:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        notePersonal:
+          type: string
+        noteAverage:
+          type: string
+        noteMin:
+          type: string
+        noteMax:
+          type: string
+        presence:
+          type: string
     ScheduleEvent:
       type: object
       properties:

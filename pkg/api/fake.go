@@ -40,6 +40,27 @@ var fakeNotes = []isen.Notation{
 	},
 }
 
+var fakeNotesClass = []isen.NotationClass{
+	{
+		Code:         "21_HOGWART_S3_HERBOLOGY",
+		Name:         "Semester 3 - Herbology - Examination",
+		NotePersonal: "19",
+		NoteAverage:  "14.21",
+		NoteMin:      "9.64",
+		NoteMax:      "19",
+		Presence:     "62",
+	},
+	{
+		Code:         "21_HOGWAR_Defense_Against_the_Dark_Arts",
+		Name:         "Semester 3 - Defense Against the Dark Arts - Examination",
+		NotePersonal: "18",
+		NoteAverage:  "10.2",
+		NoteMin:      "0",
+		NoteMax:      "18.1",
+		Presence:     "76",
+	},
+}
+
 var fakeAgenda = []isen.ScheduleEvent{
 	{
 		Id:        "1",
