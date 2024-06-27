@@ -133,7 +133,7 @@ _For more examples, please refer to the [Swagger Documentation](openapi.yml)_
 
 - [ ] Add unit test
 - [x] Add planning route
-- [ ] Add informations route
+- [x] Add informations route
 - [ ] Add teachers scrapping capabilities
 - [ ] Add possibility to automaticly calculate notation average
 

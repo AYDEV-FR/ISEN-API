@@ -213,6 +213,90 @@ paths:
                 module: "Herbology"
         '401':
           description: Not authenticated
+  /personal-informations:
+    summary: Returns all of the registered user's informations
+    description: TODO
+    get:
+      security:
+        - BearerAuth: [ ]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonalInformations'
+              example:
+                title: "Mister"
+                name: "Ronald"
+                firstName: "WEASLEY"
+                middleNames: "Bilius"
+                sex: "M"
+                birthDate: "01/03/1980"
+                birthPlace: "The Burrow"
+                nationality: "England"
+                personalAddress:
+                  title: "Mr."
+                  name: "Ronald Weasley"
+                  streetAddressLine1: "The Burrow"
+                  streetAddressLine2: "Devon"
+                  streetAddressLine3: "-"
+                  postalCodeCity: "EX11 Ottery St. Cactchpole"
+                  country: "United Kingdom"
+                parentsAddress:
+                  title: "Mr. & Ms."
+                  name: "Weasley"
+                  streetAddressLine1: "The Burrow"
+                  streetAddressLine2: "Devon"
+                  streetAddressLine3: "-"
+                  postalCodeCity: "EX11 Ottery St. Cactchpole"
+                  country: "United Kingdom"
+                reportSendingAddress:
+                  title: "Mr. & Ms."
+                  name: "Weasley"
+                  streetAddressLine1: "The Burrow"
+                  streetAddressLine2: "Devon"
+                  streetAddressLine3: "-"
+                  postalCodeCity: "EX11 Ottery St. Cactchpole"
+                  country: "United Kingdom"
+                billingAddress:
+                  title: "Mr. & Ms."
+                  name: "Weasley"
+                  streetAddressLine1: "The Burrow"
+                  streetAddressLine2: "Devon"
+                  streetAddressLine3: "-"
+                  postalCodeCity: "EX11 Ottery St. Cactchpole"
+                  country: "United Kingdom"
+                personalPhone: "+447769578549"
+                parentsPhone: "+447464751722"
+                reportSendingEmail: "arthur.weasley@mom.gouv.uk"
+                parentsEmail: "arthur.weasley@mom.gouv.uk"
+                personalEmail: "ronald.weasley@poudlard.uk"
+                lastCertificate: "Baccalauréat"
+                bac:
+                  academy: "London"
+                  year: "1990"
+                  type: "L"
+                  note: "11.54"
+                  merit: "-"
+                  school: "City of London School"
+                  schoolCode: "FDS78DS5"
+                father:
+                  name: "Weasley"
+                  firstName: "Arthur"
+                  occupation: "Government Officer"
+                mother:
+                  name: "Weasley"
+                  firstName: "Molly"
+                  occupation: "Parenting"
+                haveAcknowledgeGlobalRules: true
+                haveAcknowledgeStudentLifeCharter: true
+                canIsenUsePersonalImage: true
+
+        '401':
+          description: Not authenticated
 
 components:
   schemas:
@@ -262,6 +346,100 @@ components:
           type: array
           items:
             type: string
+    Address:
+      type: object
+      properties:
+        title:
+          type: string
+        name:
+          type: string
+        streetAddressLine1:
+          type: string
+        streetAddressLine2:
+          type: string
+        streetAddressLine3:
+          type: string
+        postalCodeCity:
+          type: string
+        country:
+          type: string
+    BacType:
+      type: object
+      properties:
+        academy:
+          type: string
+        year:
+          type: string
+        type:
+          type: string
+        note:
+          type: string
+        merit:
+          type: string
+        school:
+          type: string
+        schoolCode:
+          type: string
+    Parent:
+      type: object
+      properties:
+        name:
+          type: string
+        firstName:
+          type: string
+        occupation:
+          type: string
+    PersonalInformations:
+      type: object
+      properties:
+        title:
+          type: string
+        name:
+          type: string
+        firstName:
+          type: string
+        middleNames:
+          type: string
+        sex:
+          type: string
+        birthDate:
+          type: string
+        birthPlace:
+          type: string
+        nationality:
+          type: string
+        personalAddress:
+          $ref: '#/components/schemas/Address'
+        parentsAddress:
+          $ref: '#/components/schemas/Address'
+        reportSendingAddress:
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        personalPhone:
+          type: string
+        parentsPhone:
+          type: string
+        reportSendingEmail:
+          type: string
+        parentsEmail:
+          type: string
+        personalEmail:
+          type: string
+        lastCertificate:
+          type: string
+        Bac:
+          $ref: '#/components/schemas/BacType'
+        Father:
+          $ref: '#/components/schemas/Parent'
+        Mother:
+          $ref: '#/components/schemas/Parent'
+        HaveAcknowledgeGlobalRules:
+          type: boolean
+        HaveAcknowledgeStudentLifeCharter:
+          type: boolean
+        CanIsenUsePersonalImage:
+          type: boolean
     NotationClass:
       type: object
       properties:

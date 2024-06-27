@@ -93,11 +93,18 @@ var routes = Routes{
 	},
 
 	{
-		"NotationsClassGet",
+		"PersonalInformationsGet",
+		http.MethodGet,
+		"/v1/personal-informations",
+		PersonalInformationsGet,
+	},
+  
+  {
+    "NotationsClassGet",
 		http.MethodGet,
 		"/v1/notations/class",
 		NotationsClassGet,
-	},
+  },
 
 	{
 		"TokenPost",

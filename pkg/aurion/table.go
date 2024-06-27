@@ -71,11 +71,12 @@ func ScrapTable(token Token, currentPage []byte, pageOptions ScrapTableOption) (
 
 func convertPartialResponseToHTML(partialResponse PartialResponse) string {
 	var html string
-
 	for _, update := range partialResponse.Changes.Update {
 		switch update.ID {
 		case "form:dataTableFavori":
 			html = fmt.Sprintf("<html><table>%s</table></html>", update.Text)
+    case "form:tabPanelPrincipalFormulaireSupport":
+			html = update.Text
 		case "form:modaleDetail":
 			html = fmt.Sprintf("<html>%s</html>", update.Text)
 		}

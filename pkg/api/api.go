@@ -104,7 +104,6 @@ func NotationsGet(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, notation)
 }
-
 // NotationsClassGet - Returns a list of all user's class notes with min, average and max note
 func NotationsClassGet(c *gin.Context) {
 	token := c.GetHeader("Token")
@@ -124,6 +123,29 @@ func NotationsClassGet(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, notationClass)
+}
+
+// PersonalInformationsGet - Returns user's personal informations
+func PersonalInformationsGet(c *gin.Context) {
+  token := c.GetHeader("Token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "missing token header"})
+		return
+	}
+
+	if token == "FAKETOKEN" {
+    c.JSON(http.StatusOK, fakePersonalInformations)
+		return
+	}
+
+	infos, err := isen.GetPersonalInformations(aurion.Token(token))
+  
+  if err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+  
+  c.JSON(http.StatusOK, infos)
 }
 
 // TokenPost -
