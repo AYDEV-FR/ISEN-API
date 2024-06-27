@@ -9,12 +9,14 @@ import (
 const (
 	LoginPage    = "https://ent-toulon.isen.fr/login"
 	MainMenuPage = "https://ent-toulon.isen.fr/faces/MainMenuPage.xhtml"
+)
 
-	SelfInfoMenuId      aurion.MenuId = "0_0"
-	SelfAgendaMenuId    aurion.MenuId = "1_0"
-	NotationMenuId      aurion.MenuId = "2_1"
-	NotationClassMenuId aurion.MenuId = "2_2"
-	AbsenceMenuId       aurion.MenuId = "2_3"
+var (
+	SelfInfoMenuId      aurion.MenuId = []string{"Mon compte", "Mes informations"}
+	SelfAgendaMenuId    aurion.MenuId = []string{"Planning", "Mon planning"}
+	NotationMenuId      aurion.MenuId = []string{"Scolarité", "Mes notes"}
+	NotationClassMenuId aurion.MenuId = []string{"Scolarité", "Mes notes (classe)"}
+	AbsenceMenuId       aurion.MenuId = []string{"Scolarité", "Mes absences"}
 )
 
 func NotationPage() aurion.ScrapTableOption {
