@@ -113,6 +113,7 @@ var fakePersonalInformations = isen.PersonalInformations{
 	HaveAcknowledgeGlobalRules:        func() *bool { b := true; return &b }(),
 	HaveAcknowledgeStudentLifeCharter: func() *bool { b := true; return &b }(),
 	CanIsenUsePersonalImage:           func() *bool { b := true; return &b }(),
+}
 
 var fakeNotesClass = []isen.NotationClass{
 	{
