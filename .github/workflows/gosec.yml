@@ -1,8 +1,8 @@
 name: Gosec
 
 on:
-  push:
   pull_request:
+  push:
     branches:
       - main
 
