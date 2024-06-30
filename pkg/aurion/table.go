@@ -64,7 +64,10 @@ func ScrapTable(token Token, currentPage []byte, pageOptions ScrapTableOption) (
 
 	// Convert partial response to HTML compatible array
 	var partialResponse PartialResponse
-	xml.Unmarshal(content, &partialResponse)
+	err = xml.Unmarshal(content, &partialResponse)
+	if err != nil {
+		return "", err
+	}
 
 	return convertPartialResponseToHTML(partialResponse), nil
 }
@@ -75,7 +78,7 @@ func convertPartialResponseToHTML(partialResponse PartialResponse) string {
 		switch update.ID {
 		case "form:dataTableFavori":
 			html = fmt.Sprintf("<html><table>%s</table></html>", update.Text)
-    case "form:tabPanelPrincipalFormulaireSupport":
+		case "form:tabPanelPrincipalFormulaireSupport":
 			html = update.Text
 		case "form:modaleDetail":
 			html = fmt.Sprintf("<html>%s</html>", update.Text)
