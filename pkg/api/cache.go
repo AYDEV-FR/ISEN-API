@@ -1,6 +1,7 @@
 package api
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -33,7 +34,7 @@ func cachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 		var cache responseCache
 		key := CreateKeyFromContext(c)
 		if err := store.Get(key, &cache); err != nil {
-			if err != persistence.ErrCacheMiss {
+			if !errors.Is(err, persistence.ErrCacheMiss) {
 				log.Println(err.Error())
 			}
 			// replace writer
@@ -43,7 +44,10 @@ func cachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 
 			// Drop caches of aborted contexts
 			if c.IsAborted() {
-				store.Delete(key)
+				err := store.Delete(key)
+				if err != nil {
+					log.Println(err.Error())
+				}
 			}
 		} else {
 			fmt.Printf("EXIST\n")
@@ -53,7 +57,10 @@ func cachePage(store persistence.CacheStore, expire time.Duration, handle gin.Ha
 					c.Writer.Header().Set(k, v)
 				}
 			}
-			c.Writer.Write(cache.Data)
+			_, err := c.Writer.Write(cache.Data)
+			if err != nil {
+				log.Println(err.Error())
+			}
 		}
 	}
 }

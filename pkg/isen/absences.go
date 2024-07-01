@@ -56,7 +56,9 @@ func GetAbsenceList(token aurion.Token) ([]Absence, error) {
 				absence.Subject = s.Text()
 			}
 		})
-		absencesList = append(absencesList, absence)
+		if absence.Date != "" {
+			absencesList = append(absencesList, absence)
+		}
 	})
 
 	return absencesList, err

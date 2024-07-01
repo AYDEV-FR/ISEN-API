@@ -140,7 +140,10 @@ func ScrapSchedule(token Token, scheduleOptions ScrapScheduleOption, currentPage
 
 	// Convert partial response to HTML compatible array
 	var partialResponse PartialResponse
-	xml.Unmarshal(content, &partialResponse)
+	err = xml.Unmarshal(content, &partialResponse)
+	if err != nil {
+		return "", err
+	}
 
 	return convertPartialResponseToJson(partialResponse, formId), nil
 }
@@ -187,7 +190,10 @@ func ScrapScheduleEvent(token Token, eventId EventId, currentPage []byte) (strin
 
 	// Convert partial response to HTML compatible array
 	var partialResponse PartialResponse
-	xml.Unmarshal(content, &partialResponse)
+	err = xml.Unmarshal(content, &partialResponse)
+	if err != nil {
+		return "", err
+	}
 
 	return convertPartialResponseToHTML(partialResponse), nil
 }
