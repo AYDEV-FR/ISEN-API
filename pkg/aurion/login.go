@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 type Token string
@@ -24,6 +25,7 @@ func GetToken(username string, password string, loginPage string) (Token, error)
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
 		},
+		Timeout: 10 * time.Second,
 	}
 	req, err := http.NewRequest("POST", loginPage, strings.NewReader(data.Encode()))
 	if err != nil {
