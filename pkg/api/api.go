@@ -22,7 +22,7 @@ func AbsencesGet(c *gin.Context) {
 
 	absences, err := isen.GetAbsenceList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, absences)
@@ -50,7 +50,7 @@ func AgendaGet(c *gin.Context) {
 
 	agenda, err := isen.GetPersonalAgenda(aurion.Token(token), scheduleOptions)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, agenda)
@@ -78,7 +78,7 @@ func EventAgendaGet(c *gin.Context) {
 
 	event, err := isen.GetPersonalAgendaEvent(aurion.Token(token), aurion.EventId(eventId))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, event)
@@ -99,11 +99,12 @@ func NotationsGet(c *gin.Context) {
 
 	notation, err := isen.GetNotationList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, notation)
 }
+
 // NotationsClassGet - Returns a list of all user's class notes with min, average and max note
 func NotationsClassGet(c *gin.Context) {
 	token := c.GetHeader("Token")
@@ -119,7 +120,7 @@ func NotationsClassGet(c *gin.Context) {
 
 	notationClass, err := isen.GetNotationClassList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, notationClass)
@@ -127,25 +128,25 @@ func NotationsClassGet(c *gin.Context) {
 
 // PersonalInformationsGet - Returns user's personal informations
 func PersonalInformationsGet(c *gin.Context) {
-  token := c.GetHeader("Token")
+	token := c.GetHeader("Token")
 	if token == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "missing token header"})
 		return
 	}
 
 	if token == "FAKETOKEN" {
-    c.JSON(http.StatusOK, fakePersonalInformations)
+		c.JSON(http.StatusOK, fakePersonalInformations)
 		return
 	}
 
 	infos, err := isen.GetPersonalInformations(aurion.Token(token))
-  
-  if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-  
-  c.JSON(http.StatusOK, infos)
+
+	c.JSON(http.StatusOK, infos)
 }
 
 // TokenPost -
@@ -164,7 +165,7 @@ func TokenPost(c *gin.Context) {
 
 	token, err := aurion.GetToken(loginCredentials.Username, loginCredentials.Password, isen.LoginPage)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.Data(http.StatusOK, "text/plain", []byte(token))

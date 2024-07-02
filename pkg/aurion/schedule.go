@@ -99,7 +99,9 @@ func CalendarEventPage(formId FormId, eventId EventId) ScrapTableOption {
 func ScrapSchedule(token Token, scheduleOptions ScrapScheduleOption, currentPage []byte) (string, error) {
 
 	// Set client
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
 
 	// Get view state from currentPage
 	reader := bytes.NewReader(currentPage)
@@ -149,7 +151,9 @@ func ScrapSchedule(token Token, scheduleOptions ScrapScheduleOption, currentPage
 }
 
 func ScrapScheduleEvent(token Token, eventId EventId, currentPage []byte) (string, error) {
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
 
 	// Get view state from currentPage
 	reader := bytes.NewReader(currentPage)
