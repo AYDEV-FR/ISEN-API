@@ -34,8 +34,6 @@ func NotationPage() aurion.ScrapTableOption {
 			"form:dataTableFavori_encodeFeature": {"true"},
 			"form:dataTableFavori_sortKey":       {"form:dataTableFavori:j_idt113"},
 			"form:dataTableFavori_sortDir":       {"-1"},
-			"form:table_first":                   {"200"},
-			"form:table_rows":                    {"0"},
 			"form":                               {"form"},
 		},
 	}
@@ -46,19 +44,19 @@ func NotationClassPage() aurion.ScrapTableOption {
 		Url: "https://ent-toulon.isen.fr/faces/ChoixDonnee.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":    {"true"},
-			"javax.faces.source":          {"form:dataTableFavori"},
-			"javax.faces.partial.execute": {"form:dataTableFavori"},
-			"javax.faces.partial.render":  {"form:dataTableFavori"},
-			"form:dataTableFavori":        {"form:dataTableFavori"},
+			"javax.faces.source":          {"form:j_idt193"},
+			"javax.faces.partial.execute": {"form:j_idt193"},
+			"javax.faces.partial.render":  {"form:j_idt193"},
+			"form:j_idt193":               {"form:j_idt193"},
 
-			"form:dataTableFavori_sorting":       {"true"},
-			"form:dataTableFavori_skipChildren":  {"true"},
-			"form:dataTableFavori_encodeFeature": {"true"},
-			"form:dataTableFavori_sortKey":       {"form:dataTableFavori:j_idt113"},
-			"form:dataTableFavori_sortDir":       {"-1"},
-			"form:table_first":                   {"200"},
-			"form:table_rows":                    {"0"},
-			"form":                               {"form"},
+			"form:j_idt193_pagination":    {"true"},
+			"form:j_idt193_skipChildren":  {"true"},
+			"form:j_idt193_encodeFeature": {"true"},
+			"form:j_idt193_sortKey":       {"form:j_idt193:j_idt113"},
+			"form:j_idt193_sortDir":       {"-1"},
+			"form:j_idt193_first":         {"0"},
+			"form:j_idt193_rows":          {"200"},
+			"form":                        {"form"},
 		},
 	}
 }
@@ -78,8 +76,6 @@ func AbsencePage() aurion.ScrapTableOption {
 			"form:dataTableFavori_encodeFeature": {"true"},
 			"form:dataTableFavori_sortKey":       {"form:dataTableFavori:j_idt153"},
 			"form:dataTableFavori_sortDir":       {"-1"},
-			"form:table_first":                   {"200"},
-			"form:table_rows":                    {"0"},
 			"form":                               {"form"},
 		},
 	}
@@ -101,5 +97,3 @@ func PersonalInformationsPage() aurion.ScrapTableOption {
 		},
 	}
 }
-
-//2_3_3_0_0

@@ -76,7 +76,7 @@ func convertPartialResponseToHTML(partialResponse PartialResponse) string {
 	var html string
 	for _, update := range partialResponse.Changes.Update {
 		switch update.ID {
-		case "form:dataTableFavori":
+		case "form:dataTableFavori", "form:j_idt193":
 			html = fmt.Sprintf("<html><table>%s</table></html>", update.Text)
 		case "form:tabPanelPrincipalFormulaireSupport":
 			html = update.Text
