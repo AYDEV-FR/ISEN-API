@@ -63,7 +63,7 @@ func GetNotationList(token aurion.Token) ([]Notation, error) {
 			case 5:
 				note.Comments = s.Text()
 			case 6:
-				note.Teachers = strings.Split(s.Text(), ",")
+				note.Teachers = strings.Split(s.Text(), ", ")
 			}
 		})
 		notationsList = append(notationsList, note)
