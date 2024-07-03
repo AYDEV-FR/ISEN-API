@@ -8,13 +8,13 @@ import (
 )
 
 type Absence struct {
-	Date     string   `json:"date,omitempty"`
-	Reason   string   `json:"reason,omitempty"`
-	Duration string   `json:"duration,omitempty"`
-	Hours    string   `json:"hours,omitempty"`
-	Course   string   `json:"course,omitempty"`
-	Teachers []string `json:"teachers,omitempty"`
-	Subject  string   `json:"subject,omitempty"`
+	Date     string   `json:"date,omitempty" example:"05/12/2001" extensions:"x-order=1"`
+	Reason   string   `json:"reason,omitempty" example:"Unexcused absence" extensions:"x-order=2"`
+	Duration string   `json:"duration,omitempty" example:"2:00" extensions:"x-order=3"`
+	Hours    string   `json:"hours,omitempty" example:"08:00 - 10:00" extensions:"x-order=4"`
+	Course   string   `json:"course,omitempty" example:"Potion class" extensions:"x-order=5"`
+	Teachers []string `json:"teachers,omitempty" example:"Severus Snape,Horace Slughorn" extensions:"x-order=6"`
+	Subject  string   `json:"subject,omitempty" example:"Love filter potion" extensions:"x-order=7"`
 }
 
 func GetAbsenceList(token aurion.Token) ([]Absence, error) {

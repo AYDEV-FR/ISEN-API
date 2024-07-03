@@ -7,6 +7,9 @@ import (
 	"github.com/gin-contrib/cache/persistence"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
 )
 
 // Route is the information for every URI.
@@ -48,12 +51,13 @@ func NewRouter() *gin.Engine {
 		}
 	}
 
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	return router
 }
 
-// Index is the index handler.
 func Index(c *gin.Context) {
-	c.String(http.StatusOK, "Hello ISEN!")
+	c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
 }
 
 var routes = Routes{
@@ -63,7 +67,6 @@ var routes = Routes{
 		"/v1/",
 		Index,
 	},
-
 	{
 		"AbsencesGet",
 		http.MethodGet,
@@ -98,13 +101,13 @@ var routes = Routes{
 		"/v1/personal-informations",
 		PersonalInformationsGet,
 	},
-  
-  {
-    "NotationsClassGet",
+
+	{
+		"NotationsClassGet",
 		http.MethodGet,
 		"/v1/notations/class",
 		NotationsClassGet,
-  },
+	},
 
 	{
 		"TokenPost",

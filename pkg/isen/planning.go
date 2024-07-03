@@ -8,30 +8,30 @@ import (
 )
 
 type ScheduleEvent struct {
-	Id        string `json:"id,omitempty"`
-	Title     string `json:"title,omitempty"`
-	Start     string `json:"start,omitempty"`
-	End       string `json:"end,omitempty"`
-	AllDay    bool   `json:"allDay,omitempty"`
-	Editable  bool   `json:"editable,omitempty"`
-	ClassName string `json:"className,omitempty"`
+	Id        string `json:"id,omitempty" example:"1" extensions:"x-order=1"`
+	Title     string `json:"title,omitempty" example:"08:00 - 10:00 - Herbology Class - Professor - Sprout - GreenHouse - TD - (02h00) -  - 154632" extensions:"x-order=2"`
+	Start     string `json:"start,omitempty" example:"2001-12-05T08:00:00+0100" extensions:"x-order=3"`
+	End       string `json:"end,omitempty" example:"2001-12-05T10:00:00+0100" extensions:"x-order=4"`
+	AllDay    bool   `json:"allDay,omitempty" example:"false" extensions:"x-order=5"`
+	Editable  bool   `json:"editable,omitempty" example:"true" extensions:"x-order=6"`
+	ClassName string `json:"className,omitempty" example:"TD" extensions:"x-order=7"`
 }
 
 type ScheduleEventDetails struct {
-	Id          aurion.EventId `json:"id,omitempty"`
-	Start       string         `json:"start,omitempty"`
-	End         string         `json:"end,omitempty"`
-	Status      string         `json:"status,omitempty"`
-	Subject     string         `json:"subject,omitempty"`
-	Type        string         `json:"type,omitempty"`
-	Description string         `json:"description,omitempty"`
-	IsPaper     *bool          `json:"isPaper,omitempty"`
-	Rooms       []string       `json:"rooms,omitempty"`
-	Teachers    []string       `json:"teachers,omitempty"`
-	Students    []string       `json:"students,omitempty"`
-	Groups      []string       `json:"groups,omitempty"`
-	CourseName  string         `json:"courseName,omitempty"`
-	Module      string         `json:"module,omitempty"`
+	Id          aurion.EventId `json:"id,omitempty" example:"1" extensions:"x-order=10"`
+	Start       string         `json:"start,omitempty" example:"Du mercredi 5 décembre 2001 à 08:00" extensions:"x-order=11"`
+	End         string         `json:"end,omitempty" example:"Au mercredi 5 décembre 2001 à 10:00" extensions:"x-order=12"`
+	Status      string         `json:"status,omitempty" example:"REALISE" extensions:"x-order=13"`
+	Subject     string         `json:"subject,omitempty" example:"Herbology" extensions:"x-order=14"`
+	Type        string         `json:"type,omitempty" example:"Travaux dirigés" extensions:"x-order=15"`
+	Description string         `json:"description,omitempty" example:"" extensions:"x-order=16"`
+	IsPaper     *bool          `json:"isPaper,omitempty" example:"false" extensions:"x-order=17"`
+	Rooms       []string       `json:"rooms,omitempty" example:"Greenhouse" extensions:"x-order=18"`
+	Teachers    []string       `json:"teachers,omitempty" example:"Sprout Professor" extensions:"x-order=19"`
+	Students    []string       `json:"students,omitempty" example:"GRANGER Hermione,POTTER Harry,WEASLEY Ronald" extensions:"x-order=20"`
+	Groups      []string       `json:"groups,omitempty" example:"0102YEAR1" extensions:"x-order=21"`
+	CourseName  string         `json:"courseName,omitempty" example:"Herbology Class" extensions:"x-order=22"`
+	Module      string         `json:"module,omitempty" example:"Herbology" extensions:"x-order=23"`
 }
 
 func GetPersonalAgenda(token aurion.Token, scheduleOptions aurion.ScrapScheduleOption) ([]ScheduleEvent, error) {

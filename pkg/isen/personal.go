@@ -7,56 +7,56 @@ import (
 )
 
 type Address struct {
-	Title              string `json:"title,omitempty"`
-	Name               string `json:"name,omitempty"`
-	StreetAddressLine1 string `json:"streetAddressLine1,omitempty"`
-	StreetAddressLine2 string `json:"streetAddressLine2,omitempty"`
-	StreetAddressLine3 string `json:"streetAddressLine3,omitempty"`
-	PostalCodeCity     string `json:"postalCodeCity,omitempty"`
-	Country            string `json:"country,omitempty"`
+	Title              string `json:"title,omitempty" example:"Mr." extensions:"x-order=1"`
+	Name               string `json:"name,omitempty" example:"Ronald Weasley" extensions:"x-order=2"`
+	StreetAddressLine1 string `json:"streetAddressLine1,omitempty" example:"The Burrow" extensions:"x-order=3"`
+	StreetAddressLine2 string `json:"streetAddressLine2,omitempty" example:"Devon" extensions:"x-order=4"`
+	StreetAddressLine3 string `json:"streetAddressLine3,omitempty" example:"-" extensions:"x-order=5"`
+	PostalCodeCity     string `json:"postalCodeCity,omitempty" example:"EX11 Ottery St. Cactchpole" extensions:"x-order=6"`
+	Country            string `json:"country,omitempty" example:"United Kingdom" extensions:"x-order=7"`
 }
 
 type BacType struct {
-	Academy    string `json:"academy,omitempty"`
-	Year       string `json:"year,omitempty"`
-	Type       string `json:"type,omitempty"`
-	Note       string `json:"note,omitempty"`
-	Merit      string `json:"merit,omitempty"`
-	School     string `json:"school,omitempty"`
-	SchoolCode string `json:"schoolCode,omitempty"`
+	Academy    string `json:"academy,omitempty" example:"London" extensions:"x-order=1"`
+	Year       string `json:"year,omitempty" example:"1990" extensions:"x-order=2"`
+	Type       string `json:"type,omitempty" example:"L" extensions:"x-order=3"`
+	Note       string `json:"note,omitempty" example:"11.54" extensions:"x-order=4"`
+	Merit      string `json:"merit,omitempty" example:"-" extensions:"x-order=5"`
+	School     string `json:"school,omitempty" example:"City of London School" extensions:"x-order=6"`
+	SchoolCode string `json:"schoolCode,omitempty" example:"FDS78DS5" extensions:"x-order=7"`
 }
 
 type Parent struct {
-	Name       string `json:"name,omitempty"`
-	FirstName  string `json:"firstName,omitempty"`
-	Occupation string `json:"occupation,omitempty"`
+	Name       string `json:"name,omitempty" example:"Weasley" extensions:"x-order=1"`
+	FirstName  string `json:"firstName,omitempty" example:"Arthur" extensions:"x-order=2"`
+	Occupation string `json:"occupation,omitempty" example:"Government Officer" extensions:"x-order=3"`
 }
 
 type PersonalInformations struct {
-	Title                             string  `json:"title,omitempty"`
-	Name                              string  `json:"name,omitempty"`
-	FirstName                         string  `json:"firstName,omitempty"`
-	MiddleNames                       string  `json:"middleNames,omitempty"`
-	Sex                               string  `json:"sex,omitempty"`
-	BirthDate                         string  `json:"birthDate,omitempty"`
-	BirthPlace                        string  `json:"birthPlace,omitempty"`
-	Nationality                       string  `json:"nationality,omitempty"`
-	PersonalAddress                   Address `json:"personalAddress,omitempty"`
-	ParentsAddress                    Address `json:"parentsAddress,omitempty"`
-	ReportSendingAddress              Address `json:"reportSendingAddress,omitempty"`
-	BillingAddress                    Address `json:"billingAddress,omitempty"`
-	PersonalPhone                     string  `json:"personalPhone,omitempty"`
-	ParentsPhone                      string  `json:"parentsPhone,omitempty"`
-	ReportSendingEmail                string  `json:"reportSendingEmail,omitempty"`
-	ParentsEmail                      string  `json:"parentsEmail,omitempty"`
-	PersonalEmail                     string  `json:"personalEmail,omitempty"`
-	LastCertificate                   string  `json:"lastCertificate,omitempty"`
-	Bac                               BacType `json:"bac,omitempty"`
-	Father                            Parent  `json:"father,omitempty"`
-	Mother                            Parent  `json:"mother,omitempty"`
-	HaveAcknowledgeGlobalRules        *bool   `json:"haveAcknowledgeGlobalRules,omitempty"`
-	HaveAcknowledgeStudentLifeCharter *bool   `json:"haveAcknowledgeStudentLifeCharter,omitempty"`
-	CanIsenUsePersonalImage           *bool   `json:"canIsenUsePersonalImage,omitempty"`
+	Title                             string  `json:"title,omitempty" example:"Mister" extensions:"x-order=10"`
+	Name                              string  `json:"name,omitempty" example:"Ronald" extensions:"x-order=11"`
+	FirstName                         string  `json:"firstName,omitempty" example:"WEASLEY" extensions:"x-order=12"`
+	MiddleNames                       string  `json:"middleNames,omitempty" example:"Bilius" extensions:"x-order=13"`
+	Sex                               string  `json:"sex,omitempty" example:"M" extensions:"x-order=14"`
+	BirthDate                         string  `json:"birthDate,omitempty" example:"01/03/1980" extensions:"x-order=15"`
+	BirthPlace                        string  `json:"birthPlace,omitempty" example:"The Burrow" extensions:"x-order=16"`
+	Nationality                       string  `json:"nationality,omitempty" example:"England" extensions:"x-order=17"`
+	PersonalAddress                   Address `json:"personalAddress,omitempty" extensions:"x-order=18"`
+	ParentsAddress                    Address `json:"parentsAddress,omitempty" extensions:"x-order=19"`
+	ReportSendingAddress              Address `json:"reportSendingAddress,omitempty" extensions:"x-order=20"`
+	BillingAddress                    Address `json:"billingAddress,omitempty" extensions:"x-order=21"`
+	PersonalPhone                     string  `json:"personalPhone,omitempty" example:"+447769578549" extensions:"x-order=22"`
+	ParentsPhone                      string  `json:"parentsPhone,omitempty" example:"+447464751722" extensions:"x-order=23"`
+	ReportSendingEmail                string  `json:"reportSendingEmail,omitempty" example:"arthur.weasley@mom.gouv.uk" extensions:"x-order=24"`
+	ParentsEmail                      string  `json:"parentsEmail,omitempty" example:"arthur.weasley@mom.gouv.uk" extensions:"x-order=25"`
+	PersonalEmail                     string  `json:"personalEmail,omitempty" example:"ronald.weasley@poudlard.uk" extensions:"x-order=26"`
+	LastCertificate                   string  `json:"lastCertificate,omitempty" example:"Baccalauréat" extensions:"x-order=27"`
+	Bac                               BacType `json:"bac,omitempty" extensions:"x-order=28"`
+	Father                            Parent  `json:"father,omitempty" extensions:"x-order=29"`
+	Mother                            Parent  `json:"mother,omitempty" extensions:"x-order=30"`
+	HaveAcknowledgeGlobalRules        *bool   `json:"haveAcknowledgeGlobalRules,omitempty" example:"true" extensions:"x-order=31"`
+	HaveAcknowledgeStudentLifeCharter *bool   `json:"haveAcknowledgeStudentLifeCharter,omitempty" example:"true" extensions:"x-order=32"`
+	CanIsenUsePersonalImage           *bool   `json:"canIsenUsePersonalImage,omitempty" example:"true" extensions:"x-order=33"`
 }
 
 func FulfillAddress(address *Address, i int, content string, hasStreetLine3 bool) {

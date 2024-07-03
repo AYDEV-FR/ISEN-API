@@ -10,8 +10,8 @@ import (
 type Token string
 
 type Login struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" example:"ronald.weasley" extensions:"x-order=1"`
+	Password string `json:"password" example:"i<3hermione" extensions:"x-order=2"`
 }
 
 // GetToken - Return token/cookie with username and password given

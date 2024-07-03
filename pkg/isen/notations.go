@@ -8,23 +8,23 @@ import (
 )
 
 type Notation struct {
-	Date          string   `json:"date,omitempty"`
-	Code          string   `json:"code,omitempty"`
-	Name          string   `json:"name,omitempty"`
-	Note          string   `json:"note,omitempty"`
-	AbsenceReason string   `json:"absenceReason,omitempty"`
-	Comments      string   `json:"comments,omitempty"`
-	Teachers      []string `json:"teachers,omitempty"`
+	Date          string   `json:"date,omitempty" example:"05/12/2001" extensions:"x-order=1"`
+	Code          string   `json:"code,omitempty" example:"21_HOGWAR_Defense_Against_the_Dark_Arts" extensions:"x-order=2"`
+	Name          string   `json:"name,omitempty" example:"Semester 3 - Defense Against the Dark Arts - Examination" extensions:"x-order=3"`
+	Note          string   `json:"note,omitempty" example:"18" extensions:"x-order=4"`
+	AbsenceReason string   `json:"absenceReason,omitempty" example:"" extensions:"x-order=5"`
+	Comments      string   `json:"comments,omitempty" example:"Your Stunning Spell could be better" extensions:"x-order=6"`
+	Teachers      []string `json:"teachers,omitempty" example:"Quirinus Quirrell,Dolores Umbridge,Remus Lupin" extensions:"x-order=7"`
 }
 
 type NotationClass struct {
-	Code         string `json:"name,omitempty"`
-	Name         string `json:"code,omitempty"`
-	NotePersonal string `json:"notePersonal,omitempty"`
-	NoteAverage  string `json:"noteAverage,omitempty"`
-	NoteMin      string `json:"noteMin,omitempty"`
-	NoteMax      string `json:"noteMax,omitempty"`
-	Presence     string `json:"presence,omitempty"`
+	Code         string `json:"name,omitempty" example:"21_HOGWAR_Defense_Against_the_Dark_Arts" extensions:"x-order=1"`
+	Name         string `json:"code,omitempty" example:"Semester 3 - Defense Against the Dark Arts - Examination" extensions:"x-order=2"`
+	NotePersonal string `json:"notePersonal,omitempty" example:"18" extensions:"x-order=3"`
+	NoteAverage  string `json:"noteAverage,omitempty" example:"10.2" extensions:"x-order=4"`
+	NoteMin      string `json:"noteMin,omitempty" example:"0" extensions:"x-order=5"`
+	NoteMax      string `json:"noteMax,omitempty" example:"18.1" extensions:"x-order=6"`
+	Presence     string `json:"presence,omitempty" example:"76" extensions:"x-order=7"`
 }
 
 func GetNotationList(token aurion.Token) ([]Notation, error) {

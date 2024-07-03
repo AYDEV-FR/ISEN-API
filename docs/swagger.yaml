@@ -1,0 +1,567 @@
+basePath: /v1
+definitions:
+  api.HTTPError:
+    properties:
+      error:
+        example: error message
+        type: string
+    type: object
+  aurion.Login:
+    properties:
+      password:
+        example: i<3hermione
+        type: string
+        x-order: "2"
+      username:
+        example: ronald.weasley
+        type: string
+        x-order: "1"
+    type: object
+  isen.Absence:
+    properties:
+      course:
+        example: Potion class
+        type: string
+        x-order: "5"
+      date:
+        example: 05/12/2001
+        type: string
+        x-order: "1"
+      duration:
+        example: "2:00"
+        type: string
+        x-order: "3"
+      hours:
+        example: 08:00 - 10:00
+        type: string
+        x-order: "4"
+      reason:
+        example: Unexcused absence
+        type: string
+        x-order: "2"
+      subject:
+        example: Love filter potion
+        type: string
+        x-order: "7"
+      teachers:
+        example:
+        - Severus Snape
+        - Horace Slughorn
+        items:
+          type: string
+        type: array
+        x-order: "6"
+    type: object
+  isen.Address:
+    properties:
+      country:
+        example: United Kingdom
+        type: string
+        x-order: "7"
+      name:
+        example: Ronald Weasley
+        type: string
+        x-order: "2"
+      postalCodeCity:
+        example: EX11 Ottery St. Cactchpole
+        type: string
+        x-order: "6"
+      streetAddressLine1:
+        example: The Burrow
+        type: string
+        x-order: "3"
+      streetAddressLine2:
+        example: Devon
+        type: string
+        x-order: "4"
+      streetAddressLine3:
+        example: '-'
+        type: string
+        x-order: "5"
+      title:
+        example: Mr.
+        type: string
+        x-order: "1"
+    type: object
+  isen.BacType:
+    properties:
+      academy:
+        example: London
+        type: string
+        x-order: "1"
+      merit:
+        example: '-'
+        type: string
+        x-order: "5"
+      note:
+        example: "11.54"
+        type: string
+        x-order: "4"
+      school:
+        example: City of London School
+        type: string
+        x-order: "6"
+      schoolCode:
+        example: FDS78DS5
+        type: string
+        x-order: "7"
+      type:
+        example: L
+        type: string
+        x-order: "3"
+      year:
+        example: "1990"
+        type: string
+        x-order: "2"
+    type: object
+  isen.Notation:
+    properties:
+      absenceReason:
+        example: ""
+        type: string
+        x-order: "5"
+      code:
+        example: 21_HOGWAR_Defense_Against_the_Dark_Arts
+        type: string
+        x-order: "2"
+      comments:
+        example: Your Stunning Spell could be better
+        type: string
+        x-order: "6"
+      date:
+        example: 05/12/2001
+        type: string
+        x-order: "1"
+      name:
+        example: Semester 3 - Defense Against the Dark Arts - Examination
+        type: string
+        x-order: "3"
+      note:
+        example: "18"
+        type: string
+        x-order: "4"
+      teachers:
+        example:
+        - Quirinus Quirrell
+        - Dolores Umbridge
+        - Remus Lupin
+        items:
+          type: string
+        type: array
+        x-order: "7"
+    type: object
+  isen.Parent:
+    properties:
+      firstName:
+        example: Arthur
+        type: string
+        x-order: "2"
+      name:
+        example: Weasley
+        type: string
+        x-order: "1"
+      occupation:
+        example: Government Officer
+        type: string
+        x-order: "3"
+    type: object
+  isen.PersonalInformations:
+    properties:
+      bac:
+        allOf:
+        - $ref: '#/definitions/isen.BacType'
+        x-order: "28"
+      billingAddress:
+        allOf:
+        - $ref: '#/definitions/isen.Address'
+        x-order: "21"
+      birthDate:
+        example: 01/03/1980
+        type: string
+        x-order: "15"
+      birthPlace:
+        example: The Burrow
+        type: string
+        x-order: "16"
+      canIsenUsePersonalImage:
+        example: true
+        type: boolean
+        x-order: "33"
+      father:
+        allOf:
+        - $ref: '#/definitions/isen.Parent'
+        x-order: "29"
+      firstName:
+        example: WEASLEY
+        type: string
+        x-order: "12"
+      haveAcknowledgeGlobalRules:
+        example: true
+        type: boolean
+        x-order: "31"
+      haveAcknowledgeStudentLifeCharter:
+        example: true
+        type: boolean
+        x-order: "32"
+      lastCertificate:
+        example: Baccalauréat
+        type: string
+        x-order: "27"
+      middleNames:
+        example: Bilius
+        type: string
+        x-order: "13"
+      mother:
+        allOf:
+        - $ref: '#/definitions/isen.Parent'
+        x-order: "30"
+      name:
+        example: Ronald
+        type: string
+        x-order: "11"
+      nationality:
+        example: England
+        type: string
+        x-order: "17"
+      parentsAddress:
+        allOf:
+        - $ref: '#/definitions/isen.Address'
+        x-order: "19"
+      parentsEmail:
+        example: arthur.weasley@mom.gouv.uk
+        type: string
+        x-order: "25"
+      parentsPhone:
+        example: "+447464751722"
+        type: string
+        x-order: "23"
+      personalAddress:
+        allOf:
+        - $ref: '#/definitions/isen.Address'
+        x-order: "18"
+      personalEmail:
+        example: ronald.weasley@poudlard.uk
+        type: string
+        x-order: "26"
+      personalPhone:
+        example: "+447769578549"
+        type: string
+        x-order: "22"
+      reportSendingAddress:
+        allOf:
+        - $ref: '#/definitions/isen.Address'
+        x-order: "20"
+      reportSendingEmail:
+        example: arthur.weasley@mom.gouv.uk
+        type: string
+        x-order: "24"
+      sex:
+        example: M
+        type: string
+        x-order: "14"
+      title:
+        example: Mister
+        type: string
+        x-order: "10"
+    type: object
+  isen.ScheduleEvent:
+    properties:
+      allDay:
+        example: false
+        type: boolean
+        x-order: "5"
+      className:
+        example: TD
+        type: string
+        x-order: "7"
+      editable:
+        example: true
+        type: boolean
+        x-order: "6"
+      end:
+        example: 2001-12-05T10:00:00+0100
+        type: string
+        x-order: "4"
+      id:
+        example: "1"
+        type: string
+        x-order: "1"
+      start:
+        example: 2001-12-05T08:00:00+0100
+        type: string
+        x-order: "3"
+      title:
+        example: 08:00 - 10:00 - Herbology Class - Professor - Sprout - GreenHouse
+          - TD - (02h00) -  - 154632
+        type: string
+        x-order: "2"
+    type: object
+  isen.ScheduleEventDetails:
+    properties:
+      courseName:
+        example: Herbology Class
+        type: string
+        x-order: "22"
+      description:
+        example: ""
+        type: string
+        x-order: "16"
+      end:
+        example: Au mercredi 5 décembre 2001 à 10:00
+        type: string
+        x-order: "12"
+      groups:
+        example:
+        - 0102YEAR1
+        items:
+          type: string
+        type: array
+        x-order: "21"
+      id:
+        example: "1"
+        type: string
+        x-order: "10"
+      isPaper:
+        example: false
+        type: boolean
+        x-order: "17"
+      module:
+        example: Herbology
+        type: string
+        x-order: "23"
+      rooms:
+        example:
+        - Greenhouse
+        items:
+          type: string
+        type: array
+        x-order: "18"
+      start:
+        example: Du mercredi 5 décembre 2001 à 08:00
+        type: string
+        x-order: "11"
+      status:
+        example: REALISE
+        type: string
+        x-order: "13"
+      students:
+        example:
+        - GRANGER Hermione
+        - POTTER Harry
+        - WEASLEY Ronald
+        items:
+          type: string
+        type: array
+        x-order: "20"
+      subject:
+        example: Herbology
+        type: string
+        x-order: "14"
+      teachers:
+        example:
+        - Sprout Professor
+        items:
+          type: string
+        type: array
+        x-order: "19"
+      type:
+        example: Travaux dirigés
+        type: string
+        x-order: "15"
+    type: object
+info:
+  contact:
+    name: GitHub
+    url: https://github.com/AYDEV-FR/ISEN-API
+  description: REST API scrapping the webaurion website from ISEN Méditerranée
+  license:
+    name: MIT License
+    url: https://github.com/AYDEV-FR/ISEN-API/blob/main/LICENSE
+  title: ISEN-API
+  version: 0.0.5
+paths:
+  /absences:
+    get:
+      description: Get user's absences
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/isen.Absence'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: List user's absences
+  /agenda:
+    get:
+      description: Returns a list of all user's courses between start and end timestamps.
+      parameters:
+      - description: UNIX Milliseconds when the events in the agenda will begin
+        in: query
+        name: start
+        type: string
+      - description: UNIX Milliseconds when the events in the agenda will end
+        in: query
+        name: end
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/isen.ScheduleEvent'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user's agenda
+  /agenda/event/{eventId}:
+    get:
+      description: Get informations of an agenda event from its ID
+      parameters:
+      - description: Agenda Event ID
+        in: path
+        name: eventId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/isen.ScheduleEventDetails'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: Get informations from a specific event
+  /notations:
+    get:
+      description: Get user's notations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/isen.Notation'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: List user's notations
+  /notations/class:
+    get:
+      description: Get a list of all user's class notes with min, average and max
+        note
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/isen.Notation'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: List user's class notations
+  /personal-informations:
+    get:
+      description: Get user's personal informations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/isen.PersonalInformations'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: List user's personal informations
+  /token:
+    post:
+      consumes:
+      - application/json
+      description: Get ISEN Token needed for every authenticated request
+      parameters:
+      - description: Account credentials
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/aurion.Login'
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+      summary: Get ISEN Token
+securityDefinitions:
+  ApiKeyAuth:
+    description: Token from ISEN webaurion to access all the user's data
+    in: header
+    name: Token
+    type: apiKey
+swagger: "2.0"
