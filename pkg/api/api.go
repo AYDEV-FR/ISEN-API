@@ -35,7 +35,7 @@ func AbsencesGet(c *gin.Context) {
 
 	absences, err := isen.GetAbsenceList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, absences)
@@ -73,7 +73,7 @@ func AgendaGet(c *gin.Context) {
 
 	agenda, err := isen.GetPersonalAgenda(aurion.Token(token), scheduleOptions)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, agenda)
@@ -111,7 +111,7 @@ func EventAgendaGet(c *gin.Context) {
 
 	event, err := isen.GetPersonalAgendaEvent(aurion.Token(token), aurion.EventId(eventId))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, event)
@@ -141,7 +141,7 @@ func NotationsGet(c *gin.Context) {
 
 	notation, err := isen.GetNotationList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, notation)
@@ -171,7 +171,7 @@ func NotationsClassGet(c *gin.Context) {
 
 	notationClass, err := isen.GetNotationClassList(aurion.Token(token))
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, notationClass)
@@ -202,7 +202,7 @@ func PersonalInformationsGet(c *gin.Context) {
 	infos, err := isen.GetPersonalInformations(aurion.Token(token))
 
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -235,7 +235,7 @@ func TokenPost(c *gin.Context) {
 
 	token, err := aurion.GetToken(loginCredentials.Username, loginCredentials.Password, isen.LoginPage)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.Data(http.StatusOK, "text/plain", []byte(token))

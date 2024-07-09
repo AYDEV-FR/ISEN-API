@@ -8,13 +8,16 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 type SidebarId string
 type WebscolaappId string
 
 func updateSidebarSubmenu(token Token, viewState ViewState, wId WebscolaappId, mainMenuUrl string) (string, ViewState, error) {
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
 
 	// prepare form values to load every child of a submenu.
 	// j_idt52 is a const that doesn't change

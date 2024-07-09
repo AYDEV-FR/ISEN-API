@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 type PartialResponse struct {
@@ -31,7 +32,9 @@ type ScrapTableOption struct {
 func ScrapTable(token Token, currentPage []byte, pageOptions ScrapTableOption) (string, error) {
 
 	// Set client
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
 
 	// Get view state from currentPage
 	reader := bytes.NewReader(currentPage)
@@ -76,7 +79,7 @@ func convertPartialResponseToHTML(partialResponse PartialResponse) string {
 	var html string
 	for _, update := range partialResponse.Changes.Update {
 		switch update.ID {
-		case "form:dataTableFavori":
+		case "form:dataTableFavori", "form:j_idt193":
 			html = fmt.Sprintf("<html><table>%s</table></html>", update.Text)
 		case "form:tabPanelPrincipalFormulaireSupport":
 			html = update.Text

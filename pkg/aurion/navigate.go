@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 type MenuId []string
@@ -15,7 +16,9 @@ type MenuId []string
 // MenuNavigateTo
 func MenuNavigateTo(token Token, menuId MenuId, mainMenuUrl string) ([]byte, error) {
 	// Set client
-	client := &http.Client{}
+	client := &http.Client{
+		Timeout: 10 * time.Second,
+	}
 
 	// Get homepage
 	req, err := http.NewRequest("GET", mainMenuUrl, nil)
