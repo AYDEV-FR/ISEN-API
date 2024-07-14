@@ -16,7 +16,7 @@ var fakeAbs = []isen.Absence{
 		Date:     "05/12/2001",
 		Reason:   "Unexcused absence",
 		Duration: "2:00",
-		Hours:    "08:00 - 12:00",
+		Hours:    "08:00 - 10:00",
 		Course:   "Potion class",
 		Teachers: []string{"Severus Snape", "Horace Slughorn"},
 		Subject:  "Love filter potion",
@@ -33,7 +33,7 @@ var fakeNotes = []isen.Notation{
 	},
 	{
 		Date:     "05/12/2001",
-		Code:     "21_HOGWAR_Defense_Against_the_Dark_Arts ",
+		Code:     "21_HOGWAR_Defense_Against_the_Dark_Arts",
 		Note:     "18",
 		Comments: "Your Stunning Spell could be better",
 		Teachers: []string{"Quirinus Quirrell", "Dolores Umbridge", "Remus Lupin"},

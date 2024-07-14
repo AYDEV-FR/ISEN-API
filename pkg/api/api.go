@@ -8,7 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// AbsencesGet - Return absence list
+type HTTPError struct {
+	Error string `json:"error" example:"error message"`
+}
+
+// AbsencesGet gin Handler for /absences endpoint
+//
+//	@Summary		List user's absences
+//	@Description	Get user's absences
+//	@Produce		json
+//	@Success		200	{array}		isen.Absence
+//	@Failure		400	{object}	HTTPError
+//	@Failure		500	{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/absences [get]
 func AbsencesGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -28,8 +41,18 @@ func AbsencesGet(c *gin.Context) {
 	c.JSON(http.StatusOK, absences)
 }
 
-// AgendaGet - Returns a list of all user's courses between start and end timestamps.
-// start and end must be milliseconds UNIX timestamps. They are not mandatory and have defaults to the first and last day of the week.
+// AgendaGet gin Handler for /agenda endpoint
+//
+//	@Summary		Get user's agenda
+//	@Description	Returns a list of all user's courses between start and end timestamps.
+//	@Produce		json
+//	@Param			start	query		string	false	"UNIX Milliseconds when the events in the agenda will begin"
+//	@Param			end		query		string	false	"UNIX Milliseconds when the events in the agenda will end"
+//	@Success		200		{array}		isen.ScheduleEvent
+//	@Failure		400		{object}	HTTPError
+//	@Failure		500		{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/agenda [get]
 func AgendaGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -56,7 +79,17 @@ func AgendaGet(c *gin.Context) {
 	c.JSON(http.StatusOK, agenda)
 }
 
-// EventAgendaGet -
+// EventAgendaGet gin Handler for /agenda/event/{eventId} endpoint
+//
+//	@Summary		Get informations from a specific event
+//	@Description	Get informations of an agenda event from its ID
+//	@Produce		json
+//	@Param			eventId	path		string	true	"Agenda Event ID"
+//	@Success		200		{object}	isen.ScheduleEventDetails
+//	@Failure		400		{object}	HTTPError
+//	@Failure		500		{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/agenda/event/{eventId} [get]
 func EventAgendaGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -84,7 +117,16 @@ func EventAgendaGet(c *gin.Context) {
 	c.JSON(http.StatusOK, event)
 }
 
-// NotationsGet - Returns a list of all user's notes
+// NotationsGet gin Handler for /notations endpoint
+//
+//	@Summary		List user's notations
+//	@Description	Get user's notations
+//	@Produce		json
+//	@Success		200	{array}		isen.Notation
+//	@Failure		400	{object}	HTTPError
+//	@Failure		500	{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/notations [get]
 func NotationsGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -105,7 +147,16 @@ func NotationsGet(c *gin.Context) {
 	c.JSON(http.StatusOK, notation)
 }
 
-// NotationsClassGet - Returns a list of all user's class notes with min, average and max note
+// NotationsClassGet gin Handler for /notations/class endpoint
+//
+//	@Summary		List user's class notations
+//	@Description	Get a list of all user's class notes with min, average and max note
+//	@Produce		json
+//	@Success		200	{array}		isen.Notation
+//	@Failure		400	{object}	HTTPError
+//	@Failure		500	{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/notations/class [get]
 func NotationsClassGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -126,7 +177,16 @@ func NotationsClassGet(c *gin.Context) {
 	c.JSON(http.StatusOK, notationClass)
 }
 
-// PersonalInformationsGet - Returns user's personal informations
+// PersonalInformationsGet gin Handler for /personal-informations endpoint
+//
+//	@Summary		List user's personal informations
+//	@Description	Get user's personal informations
+//	@Produce		json
+//	@Success		200	{object}	isen.PersonalInformations
+//	@Failure		400	{object}	HTTPError
+//	@Failure		500	{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/personal-informations [get]
 func PersonalInformationsGet(c *gin.Context) {
 	token := c.GetHeader("Token")
 	if token == "" {
@@ -149,7 +209,17 @@ func PersonalInformationsGet(c *gin.Context) {
 	c.JSON(http.StatusOK, infos)
 }
 
-// TokenPost -
+// TokenPost gin Handler for /token endpoint
+//
+//	@Summary		Get ISEN Token
+//	@Description	Get ISEN Token needed for every authenticated request
+//	@Accept			json
+//	@Produce		plain
+//	@Param			account	body		aurion.Login	true	"Account credentials"
+//	@Success		200		{string}	string
+//	@Failure		400		{object}	HTTPError
+//	@Failure		500		{object}	HTTPError
+//	@Router			/token [post]
 func TokenPost(c *gin.Context) {
 	var loginCredentials aurion.Login
 	err := c.BindJSON(&loginCredentials)
