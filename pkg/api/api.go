@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/AYDEV-FR/ISEN-Api/pkg/aurion"
 	"github.com/AYDEV-FR/ISEN-Api/pkg/isen"
@@ -20,6 +21,7 @@ type HTTPError struct {
 //	@Success		200	{array}		isen.Absence
 //	@Failure		400	{object}	HTTPError
 //	@Failure		500	{object}	HTTPError
+//	@Failure		504	{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/absences [get]
 func AbsencesGet(c *gin.Context) {
@@ -35,6 +37,10 @@ func AbsencesGet(c *gin.Context) {
 
 	absences, err := isen.GetAbsenceList(aurion.Token(token))
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -51,6 +57,7 @@ func AbsencesGet(c *gin.Context) {
 //	@Success		200		{array}		isen.ScheduleEvent
 //	@Failure		400		{object}	HTTPError
 //	@Failure		500		{object}	HTTPError
+//	@Failure		504		{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/agenda [get]
 func AgendaGet(c *gin.Context) {
@@ -73,6 +80,10 @@ func AgendaGet(c *gin.Context) {
 
 	agenda, err := isen.GetPersonalAgenda(aurion.Token(token), scheduleOptions)
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -88,6 +99,7 @@ func AgendaGet(c *gin.Context) {
 //	@Success		200		{object}	isen.ScheduleEventDetails
 //	@Failure		400		{object}	HTTPError
 //	@Failure		500		{object}	HTTPError
+//	@Failure		504		{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/agenda/event/{eventId} [get]
 func EventAgendaGet(c *gin.Context) {
@@ -111,6 +123,10 @@ func EventAgendaGet(c *gin.Context) {
 
 	event, err := isen.GetPersonalAgendaEvent(aurion.Token(token), aurion.EventId(eventId))
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -125,6 +141,7 @@ func EventAgendaGet(c *gin.Context) {
 //	@Success		200	{array}		isen.Notation
 //	@Failure		400	{object}	HTTPError
 //	@Failure		500	{object}	HTTPError
+//	@Failure		504	{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/notations [get]
 func NotationsGet(c *gin.Context) {
@@ -141,6 +158,10 @@ func NotationsGet(c *gin.Context) {
 
 	notation, err := isen.GetNotationList(aurion.Token(token))
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -155,6 +176,7 @@ func NotationsGet(c *gin.Context) {
 //	@Success		200	{array}		isen.Notation
 //	@Failure		400	{object}	HTTPError
 //	@Failure		500	{object}	HTTPError
+//	@Failure		504	{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/notations/class [get]
 func NotationsClassGet(c *gin.Context) {
@@ -171,6 +193,10 @@ func NotationsClassGet(c *gin.Context) {
 
 	notationClass, err := isen.GetNotationClassList(aurion.Token(token))
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -185,6 +211,7 @@ func NotationsClassGet(c *gin.Context) {
 //	@Success		200	{object}	isen.PersonalInformations
 //	@Failure		400	{object}	HTTPError
 //	@Failure		500	{object}	HTTPError
+//	@Failure		504	{object}	HTTPError
 //	@Security		ApiKeyAuth
 //	@Router			/personal-informations [get]
 func PersonalInformationsGet(c *gin.Context) {
@@ -202,6 +229,10 @@ func PersonalInformationsGet(c *gin.Context) {
 	infos, err := isen.GetPersonalInformations(aurion.Token(token))
 
 	if err != nil {
+		if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -218,7 +249,9 @@ func PersonalInformationsGet(c *gin.Context) {
 //	@Param			account	body		aurion.Login	true	"Account credentials"
 //	@Success		200		{string}	string
 //	@Failure		400		{object}	HTTPError
+//	@Failure		401		{object}	HTTPError
 //	@Failure		500		{object}	HTTPError
+//	@Failure		504		{object}	HTTPError
 //	@Router			/token [post]
 func TokenPost(c *gin.Context) {
 	var loginCredentials aurion.Login
@@ -235,6 +268,13 @@ func TokenPost(c *gin.Context) {
 
 	token, err := aurion.GetToken(loginCredentials.Username, loginCredentials.Password, isen.LoginPage)
 	if err != nil {
+		if err.Error() == "login ou mot de passe invalide" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+			return
+		} else if os.IsTimeout(err) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
