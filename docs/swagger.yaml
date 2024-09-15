@@ -400,6 +400,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/api.HTTPError'
       security:
       - ApiKeyAuth: []
       summary: List user's absences
@@ -432,6 +436,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/api.HTTPError'
       security:
       - ApiKeyAuth: []
       summary: Get user's agenda
@@ -459,6 +467,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/api.HTTPError'
       security:
       - ApiKeyAuth: []
       summary: Get informations from a specific event
@@ -480,6 +492,10 @@ paths:
             $ref: '#/definitions/api.HTTPError'
         "500":
           description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
           schema:
             $ref: '#/definitions/api.HTTPError'
       security:
@@ -506,6 +522,10 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/api.HTTPError'
       security:
       - ApiKeyAuth: []
       summary: List user's class notations
@@ -525,6 +545,10 @@ paths:
             $ref: '#/definitions/api.HTTPError'
         "500":
           description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
           schema:
             $ref: '#/definitions/api.HTTPError'
       security:
@@ -553,8 +577,16 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/api.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/api.HTTPError'
         "500":
           description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.HTTPError'
+        "504":
+          description: Gateway Timeout
           schema:
             $ref: '#/definitions/api.HTTPError'
       summary: Get ISEN Token
