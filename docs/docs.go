@@ -55,6 +55,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
                     }
                 }
             }
@@ -106,6 +112,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
                     }
                 }
             }
@@ -149,6 +161,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
                     }
                 }
             }
@@ -183,6 +201,12 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
@@ -223,6 +247,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
                     }
                 }
             }
@@ -254,6 +284,12 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
@@ -295,8 +331,20 @@ const docTemplate = `{
                             "$ref": "#/definitions/api.HTTPError"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.HTTPError"
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
                         "schema": {
                             "$ref": "#/definitions/api.HTTPError"
                         }
