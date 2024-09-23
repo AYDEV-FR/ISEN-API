@@ -11,7 +11,7 @@
             "name": "MIT License",
             "url": "https://github.com/AYDEV-FR/ISEN-API/blob/main/LICENSE"
         },
-        "version": "0.0.5"
+        "version": "0.0.6"
     },
     "basePath": "/v1",
     "paths": {

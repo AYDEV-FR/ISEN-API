@@ -8,7 +8,7 @@ import (
 )
 
 //	@title			ISEN-API
-//	@version		0.0.5
+//	@version		0.0.6
 //	@description	REST API scrapping the webaurion website from ISEN Méditerranée
 
 //	@contact.name	GitHub
