@@ -378,7 +378,7 @@ info:
     name: MIT License
     url: https://github.com/AYDEV-FR/ISEN-API/blob/main/LICENSE
   title: ISEN-API
-  version: 0.0.5
+  version: 0.0.6
 paths:
   /absences:
     get:
