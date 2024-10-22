@@ -65,7 +65,7 @@ func CalendarPageOption(scheduleOptions ScrapScheduleOption) ScrapScheduleOption
 func CalendarPage(formId FormId, options ScrapScheduleOption) ScrapTableOption {
 
 	return ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/Planning.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/Planning.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":    {"true"},
 			"javax.faces.source":          {string(formId)},
@@ -82,7 +82,7 @@ func CalendarPage(formId FormId, options ScrapScheduleOption) ScrapTableOption {
 
 func CalendarEventPage(formId FormId, eventId EventId) ScrapTableOption {
 	return ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/Planning.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/Planning.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":          {"true"},
 			"javax.faces.source":                {string(formId)},
