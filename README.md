@@ -102,7 +102,7 @@ TOKEN=$(curl -s -X POST https://api.isen-cyber.ovh/v1/token --data '{"username":
 - You get your token directly from ISEN's Aurion website like this
 
 ```
-TOKEN=$(curl -sD - -X POST https://ent-toulon.isen.fr/login --data-raw 'username=firstname.lastname&password=<REDACTED-PASSWORD>' | grep -oP "JSESSIONID=\K([A-Z0-9]*)")
+TOKEN=$(curl -sD - -X POST https://ent.isen-mediterranee.fr/login --data-raw 'username=firstname.lastname&password=<REDACTED-PASSWORD>' | grep -oP "JSESSIONID=\K([A-Z0-9]*)")
 ```
 
 ### Get your notations
