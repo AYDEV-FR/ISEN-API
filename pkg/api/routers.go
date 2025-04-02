@@ -33,7 +33,8 @@ func NewRouter() *gin.Engine {
 
 	config := cors.DefaultConfig()
 	config.AllowAllOrigins = true
-	config.AllowHeaders = []string{"Token"} //Just for fetch in JS because we have a CORS Problem. I Authorise just the header "Token" nothing more.
+	config.AllowHeaders = []string{"Token", "Content-Type", "Authorization"}
+	config.AllowMethods = []string{"GET", "POST", "OPTIONS"}
 	router.Use(cors.New(config))
 
 	for _, route := range routes {

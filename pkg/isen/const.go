@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	LoginPage    = "https://ent-toulon.isen.fr/login"
-	MainMenuPage = "https://ent-toulon.isen.fr/faces/MainMenuPage.xhtml"
+	LoginPage    = "https://ent.isen-mediterranee.fr/login"
+	MainMenuPage = "https://ent.isen-mediterranee.fr/faces/MainMenuPage.xhtml"
 )
 
 var (
@@ -21,7 +21,7 @@ var (
 
 func NotationPage() aurion.ScrapTableOption {
 	return aurion.ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/LearnerNotationListPage.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/LearnerNotationListPage.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":    {"true"},
 			"javax.faces.source":          {"form:dataTableFavori"},
@@ -41,7 +41,7 @@ func NotationPage() aurion.ScrapTableOption {
 
 func NotationClassPage() aurion.ScrapTableOption {
 	return aurion.ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/ChoixDonnee.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/ChoixDonnee.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":    {"true"},
 			"javax.faces.source":          {"form:j_idt193"},
@@ -63,7 +63,7 @@ func NotationClassPage() aurion.ScrapTableOption {
 
 func AbsencePage() aurion.ScrapTableOption {
 	return aurion.ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/MesAbsences.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/MesAbsences.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":    {"true"},
 			"javax.faces.source":          {"form:dataTableFavori"},
@@ -83,7 +83,7 @@ func AbsencePage() aurion.ScrapTableOption {
 
 func PersonalInformationsPage() aurion.ScrapTableOption {
 	return aurion.ScrapTableOption{
-		Url: "https://ent-toulon.isen.fr/faces/TeacherPage.xhtml",
+		Url: "https://ent.isen-mediterranee.fr/faces/TeacherPage.xhtml",
 		FormOption: url.Values{
 			"javax.faces.partial.ajax":                {"true"},
 			"javax.faces.source":                      {"form:tabPanelPrincipalFormulaireSupport"},
