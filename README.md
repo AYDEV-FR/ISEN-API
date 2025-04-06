@@ -14,6 +14,8 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+![GitHub Release](https://img.shields.io/github/v/release/AYDEV-FR/ISEN-API)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/AYDEV-FR/ISEN-API/badge)](https://scorecard.dev/viewer/?uri=github.com/AYDEV-FR/ISEN-API)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -181,14 +183,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/AYDEV-FR/ISEN-API.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/AYDEV-FR/ISEN-API.svg
 [contributors-url]: https://github.com/AYDEV-FR/ISEN-API/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/AYDEV-FR/ISEN-API.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/AYDEV-FR/ISEN-API.svg
 [forks-url]: https://github.com/AYDEV-FR/ISEN-API/network/members
-[stars-shield]: https://img.shields.io/github/stars/AYDEV-FR/ISEN-API.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/AYDEV-FR/ISEN-API.svg
 [stars-url]: https://github.com/AYDEV-FR/ISEN-API/stargazers
-[issues-shield]: https://img.shields.io/github/issues/AYDEV-FR/ISEN-API.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/AYDEV-FR/ISEN-API.svg
 [issues-url]: https://github.com/AYDEV-FR/ISEN-API/issues
-[license-shield]: https://img.shields.io/github/license/AYDEV-FR/ISEN-API.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/AYDEV-FR/ISEN-API.svg
 [license-url]: https://github.com/AYDEV-FR/ISEN-API/blob/master/LICENSE
 [product-screenshot]: images/demo.gif
