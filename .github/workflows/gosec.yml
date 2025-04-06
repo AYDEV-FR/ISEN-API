@@ -6,15 +6,23 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   sectest:
     runs-on: ubuntu-latest
     env:
       GO111MODULE: on
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Gosec Security Scanner
-        uses: securego/gosec@master
+        uses: securego/gosec@1d458c50e1a9aa6c0d414dfde3998d66cf2c4fc7 # master
         with:
           args: ./...
