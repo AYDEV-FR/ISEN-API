@@ -14,7 +14,7 @@ services:
       - api-network
 
   isen-api:
-    image: docker.io/aydev/isen-api:latest
+    image: ghcr.io/aydev-fr/isen-api:latest
     networks:
       - api-network
 
