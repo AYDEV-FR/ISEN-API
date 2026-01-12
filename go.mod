@@ -11,7 +11,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
-	github.com/swaggo/swag v1.16.3
+	github.com/swaggo/swag v1.16.6
 )
 
 require (
@@ -50,6 +50,7 @@ require (
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/crypto v0.35.0 // indirect
+	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
