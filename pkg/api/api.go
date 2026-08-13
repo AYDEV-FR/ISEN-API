@@ -271,6 +271,9 @@ func TokenPost(c *gin.Context) {
 		if err.Error() == "login ou mot de passe invalide" {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 			return
+		} else if err.Error() == "isen server error" {
+			c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
+			return
 		} else if os.IsTimeout(err) {
 			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
 			return
