@@ -38,6 +38,9 @@ func GetToken(username string, password string, loginPage string) (Token, error)
 		return "", err
 	}
 
+	if res.StatusCode >= 500 {
+		return "", errors.New("isen server error")
+	}
 	if res.StatusCode != http.StatusFound {
 		return "", errors.New("login ou mot de passe invalide")
 	}
